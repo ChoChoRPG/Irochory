@@ -2345,6 +2345,10 @@
             // (BARU) Tampilkan tombol jawaban secara permanen di layar flashcard
             document.getElementById('answer-buttons').classList.remove('hidden');
             displayCard();
+            
+            // (BARU) Pastikan kartu pertama terlihat dan tidak 'opacity-0'
+            const cardContainer = document.getElementById('card-container');
+            cardContainer.classList.remove('opacity-0', 'scale-95');
         }
 
         function showScreen(screenId) {
@@ -2356,19 +2360,15 @@
         }
 
         function displayCard() {
-            if (currentCardIndex >= currentDeck.length) {
-                showResults();
-                return;
-            }
-
-            // Reset tampilan kartu
-            document.getElementById('card-inner').parentElement.classList.remove('is-flipped');
-            // (DIHAPUS) Baris di bawah ini dihapus agar tombol jawaban tetap ada
-            // document.getElementById('answer-buttons').classList.add('hidden');
-            // document.getElementById('flip-button').classList.remove('hidden');
+            // (DIHAPUS) Pengecekan 'showResults' (dipindah ke handleAnswer)
+            // (DIHAPUS) Reset 'is-flipped' (dipindah ke handleAnswer)
+            // (DIHAPUS) Animasi fade-in (dipindah ke handleAnswer)
 
             const card = currentDeck[currentCardIndex];
             
+            // (BARU) Safety check jika deck kosong atau index bermasalah
+            if (!card) return; 
+
             document.getElementById('card-kanji').textContent = card.kanji;
             document.getElementById('card-furigana').textContent = card.furigana;
             document.getElementById('card-arti').textContent = card.arti;
@@ -2394,7 +2394,8 @@
 
         function handleAnswer(isCorrect) {
             // (BARU) Animasi fade-out / zoom-out kartu saat ini
-            document.getElementById('card-container').classList.add('opacity-0', 'scale-95');
+            const cardContainer = document.getElementById('card-container');
+            cardContainer.classList.add('opacity-0', 'scale-95');
 
             const correctBtn = document.getElementById('correct-button');
             const incorrectBtn = document.getElementById('incorrect-button');
@@ -2411,11 +2412,39 @@
                 setTimeout(() => incorrectBtn.classList.remove('flash-incorrect'), 500);
             }
 
-            // Jeda singkat sebelum kartu berikutnya
+            // (PERUBAHAN) Logika dipindahkan dari displayCard() ke sini
+            // Jeda singkat (300ms) selama kartu fade-out
             setTimeout(() => {
                 currentCardIndex++;
-                displayCard();
-            }, 300);
+                
+                // 1. Cek apakah sesi selesai
+                if (currentCardIndex >= currentDeck.length) {
+                    showResults();
+                    return;
+                }
+
+                // 2. Selagi kartu tidak terlihat (opacity-0):
+                const cardInner = document.getElementById('card-inner');
+
+                //    Matikan transisi flip
+                cardInner.style.transition = 'none';
+                
+                //    Langsung balikkan kartu ke depan
+                cardContainer.classList.remove('is-flipped');
+
+                // 3. Panggil displayCard() untuk *update konten* (saat masih opacity-0)
+                displayCard(); 
+
+                // 4. Force reflow (penting)
+                void cardInner.offsetWidth; 
+
+                // 5. Nyalakan lagi transisi flip
+                cardInner.style.transition = 'transform 0.6s';
+
+                // 6. Fade in kartu yang sudah benar (setelah di-update)
+                cardContainer.classList.remove('opacity-0', 'scale-95');
+
+            }, 300); // Harus cocok dengan durasi transisi 'opacity'
         }
 
         function handleTTS() {

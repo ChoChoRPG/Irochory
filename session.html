@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Irochori - Sesi Belajar</title>
+    <!-- Tautan ke CSS Kustom Anda -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Ikon Favicon -->
+    <link rel="icon" href="assets/img/logo.svg">
+</head>
+<body>
+
+    <main class="container">
+
+        <!-- (DIHAPUS) Layar Pemilihan tidak ada di sini -->
+
+        <!-- ===== 2. Layar Flashcard ===== -->
+        <section id="flashcard-screen" class="screen active"> <!-- (BARU) Langsung aktif -->
+            <!-- Progress Bar -->
+            <div class="progress-bar">
+                <span id="progress-text">1 / ...</span>
+                <button id="exit-button" class="btn-exit">Keluar</button>
+            </div>
+            
+            <!-- Card Container -->
+            <div id="card-container" class="card-container">
+                <div id="card-inner" class="card-inner">
+                    <!-- Bagian Depan (Kanji) -->
+                    <div id="card-front" class="card-face card-front">
+                        <span id="card-kanji" class="kanji-text">Memuat...</span>
+                    </div>
+                    <!-- Bagian Belakang (Furigana + Arti) -->
+                    <div id="card-back" class="card-face card-back">
+                        <span id="card-furigana" class="furigana-text"></span>
+                        <span id="card-arti" class="arti-text"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tombol Benar / Salah -->
+            <div id="answer-buttons" class="answer-buttons">
+                <button id="incorrect-button" class="btn btn-circle btn-incorrect">
+                    <img src="assets/img/silang.svg" alt="Salah" class="icon-large">
+                </button>
+                <button id="tts-button" class="btn btn-circle btn-tts">
+                    <img src="assets/img/audio.svg" alt="Audio" class="icon-large">
+                </button>
+                <button id="correct-button" class="btn btn-circle btn-correct">
+                    <img src="assets/img/ceklis.svg" alt="Benar" class="icon-large">
+                </button>
+            </div>
+        </section>
+
+        <!-- ===== 3. Layar Hasil ===== -->
+        <section id="results-screen" class="screen hidden">
+            <div class="card results-card">
+                <h2 class="screen-title">Sesi Selesai!</h2>
+                <p class="score-label">Skor Anda:</p>
+                <div id="score-display" class="score-display">0 / 0</div>
+
+                <div id="incorrect-list-container" class="incorrect-container">
+                    <h3 class="incorrect-title">Daftar Kesalahan:</h3>
+                    <div class="table-wrapper">
+                        <table class="results-table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Kanji</th>
+                                    <th>Furigana</th>
+                                    <th>Arti</th>
+                                </tr>
+                            </thead>
+                            <tbody id="incorrect-list-tbody">
+                                <!-- Daftar kesalahan akan dimasukkan oleh JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <button id="restart-button" class="btn btn-primary btn-restart">
+                    Coba Lagi
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- (BARU) JavaScript Khusus untuk Sesi Ini (Inline) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // === Global State ===
+            let originalDeck = []; // Salinan data asli dari localStorage
+            let currentDeck = [];
+            let currentCardIndex = 0;
+            let score = 0;
+            let incorrectAnswers = [];
+            let synth = window.speechSynthesis;
+            let utterance = new SpeechSynthesisUtterance();
+
+            // === DOM Element Selectors ===
+            const screens = {
+                flashcard: document.getElementById('flashcard-screen'),
+                results: document.getElementById('results-screen'),
+            };
+            const exitButton = document.getElementById('exit-button');
+            const progressText = document.getElementById('progress-text');
+            const cardContainer = document.getElementById('card-container');
+            const cardInner = document.getElementById('card-inner');
+            const cardKanji = document.getElementById('card-kanji');
+            const cardFurigana = document.getElementById('card-furigana');
+            const cardArti = document.getElementById('card-arti');
+            const answerButtons = document.getElementById('answer-buttons');
+            const correctButton = document.getElementById('correct-button');
+            const incorrectButton = document.getElementById('incorrect-button');
+            const ttsButton = document.getElementById('tts-button');
+            const scoreDisplay = document.getElementById('score-display');
+            const incorrectContainer = document.getElementById('incorrect-list-container');
+            const incorrectTbody = document.getElementById('incorrect-list-tbody');
+            const restartButton = document.getElementById('restart-button');
+
+            // === Logika Utama Sesi ===
+            function initializeSession() {
+                const deckDataString = localStorage.getItem('irochoriDeck');
+
+                if (!deckDataString) {
+                    alert("Gagal memulai sesi (tidak ada data). Anda akan dikembalikan ke menu.");
+                    window.location.href = 'index.html';
+                    return;
+                }
+
+                try {
+                    originalDeck = JSON.parse(deckDataString);
+                    // Bersihkan data agar tidak penuh
+                    localStorage.removeItem('irochoriDeck'); 
+                } catch (e) {
+                    alert("Gagal membaca data sesi. Anda akan dikembalikan ke menu.");
+                    window.location.href = 'index.html';
+                    return;
+                }
+
+                if (originalDeck.length === 0) {
+                    alert("Sesi kosong. Anda akan dikembalikan ke menu.");
+                    window.location.href = 'index.html';
+                    return;
+                }
+                
+                setupEventListeners();
+                startSession(); // Memulai sesi pertama kali
+            }
+            
+            // Fungsi untuk memulai/mengulang sesi
+            function startSession() {
+                // Salin dari deck asli dan acak JIKA diperlukan (misal saat restart)
+                currentDeck = [...originalDeck];
+                
+                // Shuffle deck (Fisher-Yates)
+                for (let i = currentDeck.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [currentDeck[i], currentDeck[j]] = [currentDeck[j], currentDeck[i]];
+                }
+                
+                // Reset state
+                currentCardIndex = 0;
+                score = 0;
+                incorrectAnswers = [];
+                
+                showScreen('flashcard');
+                answerButtons.classList.remove('hidden');
+                cardContainer.classList.remove('is-flipped', 'opacity-0', 'scale-95');
+                
+                displayCard();
+            }
+
+            // === Event Listeners ===
+            function setupEventListeners() {
+                cardContainer.addEventListener('click', handleFlipCard);
+                correctButton.addEventListener('click', () => handleAnswer(true));
+                incorrectButton.addEventListener('click', () => handleAnswer(false));
+                ttsButton.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    handleTTS();
+                });
+                
+                // Coba lagi HANYA mengulang sesi ini
+                restartButton.addEventListener('click', startSession); 
+                
+                // Keluar kembali ke index.html
+                exitButton.addEventListener('click', () => {
+                    window.location.href = 'index.html';
+                });
+                
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === '=') handleAnswer(true);
+                });
+            }
+
+            // === Logika Game (Sama seperti sebelumnya) ===
+            function showScreen(screenId) {
+                Object.values(screens).forEach(screen => screen.classList.remove('active'));
+                screens[screenId].classList.add('active');
+            }
+
+            function displayCard() {
+                const card = currentDeck[currentCardIndex];
+                if (!card) return; 
+
+                cardKanji.textContent = card.kanji;
+                cardFurigana.textContent = card.furigana;
+                cardArti.textContent = card.arti;
+                progressText.textContent = `${currentCardIndex + 1} / ${currentDeck.length}`;
+                utterance.text = card.furigana;
+                utterance.lang = 'ja-JP';
+            }
+
+            function handleFlipCard() {
+                cardContainer.classList.toggle('is-flipped');
+            }
+
+            function handleAnswer(isCorrect) {
+                cardContainer.classList.add('opacity-0', 'scale-95');
+
+                if (isCorrect) {
+                    score++;
+                    correctButton.classList.add('flash-correct');
+                    setTimeout(() => correctButton.classList.remove('flash-correct'), 500);
+                } else {
+                    incorrectAnswers.push(currentDeck[currentCardIndex]);
+                    incorrectButton.classList.add('flash-incorrect');
+                    setTimeout(() => incorrectButton.classList.remove('flash-incorrect'), 500);
+                }
+
+                setTimeout(() => {
+                    currentCardIndex++;
+                    
+                    if (currentCardIndex >= currentDeck.length) {
+                        showResults();
+                        return;
+                    }
+
+                    cardInner.style.transition = 'none';
+                    cardContainer.classList.remove('is-flipped');
+                    displayCard(); 
+                    void cardInner.offsetWidth; 
+                    cardInner.style.transition = 'transform 0.6s';
+                    cardContainer.classList.remove('opacity-0', 'scale-95');
+
+                }, 300);
+            }
+
+            function handleTTS() {
+                if (synth.speaking) synth.cancel();
+                synth.speak(utterance);
+            }
+
+            function showResults() {
+                showScreen('results');
+                scoreDisplay.textContent = `${score} / ${currentDeck.length}`;
+                incorrectTbody.innerHTML = '';
+
+                if (incorrectAnswers.length === 0) {
+                    incorrectContainer.classList.add('hidden');
+                } else {
+                    incorrectContainer.classList.remove('hidden');
+                    incorrectAnswers.forEach((card, index) => {
+                        incorrectTbody.innerHTML += `
+                            <tr>
+                                <td>${index + 1}</td>
+                                <td>${card.kanji}</td>
+                                <td>${card.furigana}</td>
+                                <td>${card.arti}</td>
+                            </tr>
+                        `;
+                    });
+                }
+            }
+            
+            // Jalankan
+            initializeSession();
+        });
+    </script>
+</body>
+</html>

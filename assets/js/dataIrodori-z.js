@@ -1,0 +1,1791 @@
+const dataString = `
+主任, しゅにん, Kepala, z, 1
+パート, パート, Pekerja paruh waktu, z, 1
+いちばん, いちばん, Paling, z, 1
+長い, ながい, Panjang, z, 1
+～出身, ～しゅっしん, Berasal dari ～, z, 1
+手続き, てつづき, Prosedur, z, 1
+生活, せいかつ, Kehidupan, z, 1
+いろいろ（な）, いろいろ（な）, Bermacam-macam, z, 1
+何でも, なんでも, Apa saja, z, 1
+～でよかったら, ～でよかったら, Kalau ～ tidak apa-apa, z, 1
+いつでも, いつでも, Kapan saja, z, 1
+担当, たんとう, Penanggung jawab, z, 1
+申す, もうす, Bernama (humble), z, 1
+呼ぶ, よぶ, Memanggil, z, 1
+一生懸命, いっしょうけんめい, Dengan sungguh-sungguh, z, 1
+がんばる, がんばる, Berusaha keras, z, 1
+J-POP, ジェーポップ, Musik pop Jepang, z, 1
+がんばります, がんばります, Saya akan berusaha sebaik mungkin, z, 1
+パフューム, パフューム, Perfume, z, 1
+方角, ほうがく, Arah, z, 1
+北, きた, Utara, z, 1
+東, ひがし, Timur, z, 1
+南, みなみ, Selatan, z, 1
+西, にし, Barat, z, 1
+自然, しぜん, Alam, z, 1
+川, かわ, Sungai, z, 1
+島, しま, Pulau, z, 1
+森, もり, Hutan, z, 1
+ジャングル, ジャングル, Hutan rimba, z, 1
+草原, そうげん, Padang rumput, z, 1
+砂漠, さばく, Gurun, z, 1
+高原, こうげん, Dataran tinggi, z, 1
+首都, しゅと, Ibu kota, z, 1
+観光地, かんこうち, Tempat wisata, z, 1
+モンゴル, モンゴル, Mongolia, z, 1
+のんびりしている, のんびりしている, Santai, z, 1
+都会, とかい, Kota (besar), z, 1
+畑, はたけ, Ladang, z, 1
+観光客, かんこうきゃく, Wisatawan, z, 1
+大勢, おおぜい, Banyak (orang), z, 1
+お客さん, おきゃくさん, Pengunjung, z, 1
+テント, テント, Tenda, z, 1
+違います, ちがいます, Bukan begitu, z, 1
+セブ, セブ, Cebu, z, 1
+ウランバートル, ウランバートル, Ulaanbaatar, z, 1
+ホーチミン, ホーチミン, Ho Chi Minh, z, 1
+ウォノソボ, ウォノソボ, Wonosobo, z, 1
+セブ島, セブとう, Pulau Cebu, z, 1
+自己紹介, じこしょうかい, Perkenalan diri, z, 1
+猫, ねこ, Kucing, z, 1
+グループ, グループ, Kelompok, z, 1
+コミュニケーションする, コミュニケーションする, Berkomunikasi, z, 1
+インド料理, インドりょうり, Masakan India, z, 1
+食べ歩き, たべあるき, Wisata kuliner, z, 1
+ニックネーム, ニックネーム, Nama panggilan, z, 1
+バンコク, バンコク, Bangkok, z, 1
+アニソン, アニソン, Lagu anime, z, 1
+
+髪, かみ, Rambut, z, 2
+髪が長い, かみがながい, Berambut panjang, z, 2
+髪が短い, かみがみじかい, Berambut pendek, z, 2
+背, せ, Tinggi (badan), z, 2
+背が高い, せがたかい, Tinggi (badan), z, 2
+座る, すわる, Duduk, z, 2
+立つ, たつ, Berdiri, z, 2
+かぶる, かぶる, Memakai (topi), z, 2
+ピアス, ピアス, Anting, z, 2
+する, する, Memakai (anting), z, 2
+ワンピース, ワンピース, Terusan (pakaian), z, 2
+着る, きる, Memakai (baju), z, 2
+はく, はく, Memakai (sepatu/celana), z, 2
+めがね, めがね, Kacamata, z, 2
+かける, かける, Memakai (kacamata), z, 2
+ひげ, ひげ, Janggut / Kumis, z, 2
+はやす, はやす, Memelihara (janggut/kumis), z, 2
+シャツ, シャツ, Kemeja, z, 2
+ズボン, ズボン, Celana panjang, z, 2
+赤い, あかい, Merah, z, 2
+白い, しろい, Putih, z, 2
+黄色い, きいろい, Kuning, z, 2
+青い, あおい, Biru, z, 2
+黒い, くろい, Hitam, z, 2
+男の人, おとこのひと, Laki-laki, z, 2
+ジャンパー, ジャンパー, Jaket, z, 2
+ほら, ほら, Lihat!, z, 2
+やさしい, やさしい, Baik hati / Ramah, z, 2
+きびしい, きびしい, Tegas / Keras, z, 2
+こわい, こわい, Menakutkan, z, 2
+忙しい, いそがしい, Sibuk, z, 2
+まじめ（な）, まじめ（な）, Serius / Tulus, z, 2
+元気（な）, げんき（な）, Sehat / Energik, z, 2
+恋人, こいびと, Pacar, z, 2
+孫, まご, Cucu, z, 2
+この間, このあいだ, Beberapa hari lalu, z, 2
+赤ちゃん, あかちゃん, Bayi, z, 2
+泣く, なく, Menangis, z, 2
+今度, こんど, Kali ini / Lain kali, z, 2
+見た目, みため, Penampilan, z, 2
+遅くまで, おそくまで, Sampai larut, z, 2
+心配（な）, しんぱい（な）, Khawatir, z, 2
+かっこいい, かっこいい, Keren, z, 2
+歌, うた, Lagu / Menyanyi, z, 2
+演技, えんぎ, Akting, z, 2
+ダンス, ダンス, Tarian / Menari, z, 2
+上手（な）, じょうず（な）, Pandai / Mahir, z, 2
+歌手, かしゅ, Penyanyi, z, 2
+だれか, だれか, Seseorang, z, 2
+引退する, いんたいする, Pensiun, z, 2
+今でも, いまでも, Sampai sekarang pun, z, 2
+俳優, はいゆう, Aktor, z, 2
+そんな, そんな, Seperti itu, z, 2
+きっかけ, きっかけ, Pemicu / Alasan awal, z, 2
+映画祭, えいがさい, Festival film, z, 2
+世界中, せかいじゅう, Seluruh dunia, z, 2
+ファン, ファン, Penggemar, z, 2
+安室奈美恵, あむろなみえ, Amuro Namie, z, 2
+三船敏郎, みふねとしろう, Mifune Toshiro, z, 2
+七人の侍, しちにんのさむらい, Seven Samurai, z, 2
+まず, まず, Pertama-tama, z, 2
+金色, きんいろ, (Warna) Emas, z, 2
+驚く, おどろく, Terkejut, z, 2
+明るい, あかるい, Terang / Ceria, z, 2
+びっくりする, びっくりする, Kaget, z, 2
+ハイキング, ハイキング, Mendaki (hiking), z, 2
+できれば, できれば, Jika memungkinkan, z, 2
+シリーズ, シリーズ, Seri, z, 2
+おとなりさん, おとなりさん, Tetangga, z, 2
+簡単に, かんたんに, Dengan mudah, z, 2
+ヤンゴン, ヤンゴン, Yangon, z, 2
+パゴダ, パゴダ, Pagoda, z, 2
+増える, ふえる, Bertambah / Meningkat, z, 2
+交流協会, こうりゅうきょうかい, Asosiasi pertukaran, z, 2
+
+定食, ていしょく, Set menu, z, 3
+日替わり, ひがわり, Menu spesial harian, z, 3
+大盛り, おおもり, Porsi besar, z, 3
+おかわり自由, おかわりじゆう, Isi ulang gratis, z, 3
+平日, へいじつ, Hari kerja, z, 3
+～のみ, ～のみ, Hanya ～, z, 3
+ホット, ホット, Panas, z, 3
+アイス, アイス, Dingin (es), z, 3
+焼き魚, やきざかな, Ikan bakar, z, 3
+ハンバーグ, ハンバーグ, Bistik hamburger, z, 3
+カレーライス, カレーライス, Nasi kari, z, 3
+かつ丼, かつどん, Katsudon, z, 3
+親子丼, おやこどん, Oyakodon, z, 3
+つく, つく, Disajikan dengan, z, 3
+だめ（な）, だめ（な）, Tidak bisa / Tidak boleh, z, 3
+材料, ざいりょう, Bahan, z, 3
+豚肉, ぶたにく, Daging babi, z, 3
+牛肉, ぎゅうにく, Daging sapi, z, 3
+カニ, カニ, Kepiting, z, 3
+ナッツ, ナッツ, Kacang-kacangan, z, 3
+わさび, わさび, Wasabi, z, 3
+ねぎ, ねぎ, Daun bawang, z, 3
+みりん, みりん, Mirin, z, 3
+宗教, しゅうきょう, Agama, z, 3
+～上, ～じょう, Dari segi ～, z, 3
+理由, りゆう, Alasan, z, 3
+アレルギー, アレルギー, Alergi, z, 3
+自転車, じてんしゃ, Sepeda, z, 3
+来る, くる, Datang, z, 3
+ベジタリアン, ベジタリアン, Vegetarian, z, 3
+豆腐, とうふ, Tahu, z, 3
+注文する, ちゅうもんする, Memesan, z, 3
+飲める, のめる, Bisa minum, z, 3
+メニュー, メニュー, Menu, z, 3
+食べられる, たべられる, Bisa makan, z, 3
+ほかの, ほかの, Lainnya, z, 3
+～抜き, ～ぬき, Tanpa ～, z, 3
+そっか, そっか, Oh begitu., z, 3
+かしこまりました, かしこまりました, Baik, saya mengerti., z, 3
+カウンター, カウンター, Meja konter, z, 3
+座敷, ざしき, Ruang tatami, z, 3
+テーブル, テーブル, Meja, z, 3
+会計, かいけい, Pembayaran, z, 3
+レジ, レジ, Kasir, z, 3
+禁煙, きんえん, Dilarang merokok, z, 3
+～名, ～めい, ～ orang, z, 3
+当店, とうてん, Restoran kami, z, 3
+全面, ぜんめん, Seluruhnya, z, 3
+決まる, きまる, Memutuskan, z, 3
+おすすめ, おすすめ, Rekomendasi, z, 3
+人気がある, にんきがある, Populer, z, 3
+フライ, フライ, Gorengan (ala Jepang), z, 3
+ミックスフライ, ミックスフライ, Gorengan campur, z, 3
+量, りょう, Jumlah / Porsi, z, 3
+普通, ふつう, Biasa, z, 3
+先に, さきに, Duluan, z, 3
+別々, べつべつ, Terpisah, z, 3
+クーポン, クーポン, Kupon, z, 3
+次回, じかい, Lain kali, z, 3
+それにします, それにします, Saya pilih itu., z, 3
+お会計、お願いします, おかいけい、おねがいします, Minta bon-nya., z, 3
+別々でお願いします, べつべつでおねがいします, Tolong (bayar) pisah., z, 3
+お客様, おきゃくさま, Pelanggan, z, 3
+何名様, なんめいさま, Berapa orang, z, 3
+～名様, ～めいさま, ～ orang, z, 3
+ご注文, ごちゅうもん, Pesanan, z, 3
+いかが, いかが, Bagaimana, z, 3
+ごいっしょ, ごいっしょ, Bersama, z, 3
+よろしいですか？, よろしいですか？, Apakah sudah benar?, z, 3
+～がございます, ～がございます, Kami ada ～., z, 3
+お決まりですか？, おきまりですか？, Sudah memutuskan?, z, 3
+いかがですか？, いかがですか？, Bagaimana? / Mau?, z, 3
+どうなさいますか？, どうなさいますか？, Mau bagaimana?, z, 3
+以上でよろしいですか？, いじょうでよろしいですか？, Apakah sudah semua?, z, 3
+お使いください, おつかいください, Silakan gunakan., z, 3
+少なめ, すくなめ, Lebih sedikit, z, 3
+食後に, しょくごに, Setelah makan, z, 3
+日にち, ひにち, Tanggal, z, 3
+まちがい, まちがい, Kesalahan, z, 3
+失礼しました, しつれいしました, Mohon maaf., z, 3
+お電話, おでんわ, Telepon, z, 3
+ご予約, ごよやく, Reservasi, z, 3
+お時間, おじかん, Waktu, z, 3
+お電話番号, おでんわばんごう, Nomor telepon, z, 3
+～様, ～さま, Sdr/i ～, z, 3
+おまちがいないでしょうか？, おまちがいないでしょうか？, Apakah sudah benar?, z, 3
+半額, はんがく, Setengah harga, z, 3
+有効期限, ゆうこうきげん, Tanggal kedaluwarsa, z, 3
+ドリンクバー, ドリンクバー, Bar minuman (prasmanan), z, 3
+おこさま, おこさま, Anak-anak, z, 3
+ご注文時, ごちゅうもんじ, Saat memesan, z, 3
+本券, ほんけん, Kupon ini, z, 3
+使用, しよう, Penggunaan, z, 3
+時間帯, じかんたい, Jam (periode waktu), z, 3
+ご提示ください, ごていじください, Silakan tunjukkan ～., z, 3
+ご利用できません, ごりようできません, Anda tidak dapat menggunakan ～., z, 3
+ご飲食代, ごいんしょくだい, Biaya makan/minum, z, 3
+会計時, かいけいじ, Saat membayar, z, 3
+利用可能（な）, りようかのう（な）, Dapat digunakan, z, 3
+～限り, ～かぎり, Hanya ～, z, 3
+有効（な）, ゆうこう（な）, Berlaku, z, 3
+他, た, Lainnya, z, 3
+併用, へいよう, Penggunaan bersamaan, z, 3
+お見せください, おみせください, Silakan perlihatkan ～., z, 3
+
+本物, ほんもの, Asli, z, 4
+量, りょう, Jumlah, z, 4
+とり, とり, Ayam, z, 4
+彼女, かのじょ, Pacar (perempuan), z, 4
+食事, しょくじ, Makanan / Makan, z, 4
+ベトナム料理, ベトナムりょうり, Masakan Vietnam, z, 4
+土地, とち, Lokal / Daerah, z, 4
+おれ, おれ, Aku (pria), z, 4
+看板, かんばん, Papan nama, z, 4
+この辺, このへん, Sekitar sini, z, 4
+新しく, あたらしく, (Secara) Baru, z, 4
+できる, できる, Baru buka, z, 4
+地図, ちず, Peta, z, 4
+送る, おくる, Mengirim, z, 4
+このあたり, このあたり, Dekat sini, z, 4
+夫婦, ふうふ, Pasangan suami istri, z, 4
+知りませんでした, しりませんでした, Saya tidak tahu., z, 4
+食べ方, たべかた, Cara makan, z, 4
+つける, つける, Mencelupkan, z, 4
+混ぜる, まぜる, Mencampur, z, 4
+かける, かける, Menuangkan (saus), z, 4
+入れる, いれる, Memasukkan / Menambahkan, z, 4
+巻く, まく, Menggulung, z, 4
+のせる, のせる, Meletakkan di atas, z, 4
+むく, むく, Mengupas, z, 4
+混ぜそば, まぜそば, Soba campur, z, 4
+シュウマイ, シュウマイ, Siomay, z, 4
+天ぷら, てんぷら, Tempura, z, 4
+トマト, トマト, Tomat, z, 4
+手巻きずし, てまきずし, Temaki-zushi, z, 4
+焼きいも, やきいも, Ubi bakar, z, 4
+味がついている, あじがついている, Sudah berbumbu, z, 4
+しょうゆ, しょうゆ, Kecap asin, z, 4
+つゆ, つゆ, Saus celup, z, 4
+そのまま, そのまま, Apa adanya, z, 4
+のり, のり, Rumput laut, z, 4
+皮, かわ, Kulit (tomat), z, 4
+お待たせしました, おまたせしました, Maaf membuat Anda menunggu., z, 4
+一度に, いちどに, Sekaligus, z, 4
+そんなに, そんなに, Sebegitunya, z, 4
+しゃぶしゃぶ, しゃぶしゃぶ, Shabu-shabu, z, 4
+こうやって, こうやって, Seperti ini, z, 4
+味がない, あじがない, Hambar / Tidak ada rasa, z, 4
+ポン酢, ポンず, Cuka ponzu, z, 4
+ごまだれ, ごまだれ, Saus wijen, z, 4
+白菜, はくさい, Sawi putih, z, 4
+調味料, ちょうみりょう, Bumbu, z, 4
+砂糖, さとう, Gula, z, 4
+こしょう, こしょう, Merica, z, 4
+スパイス, スパイス, Rempah-rempah, z, 4
+ソース, ソース, Saus, z, 4
+たれ, たれ, Saus celup (tare), z, 4
+油, あぶら, Minyak, z, 4
+調理方法, ちょうりほうほう, Cara memasak, z, 4
+切る, きる, Memotong, z, 4
+焼く, やく, Membakar / Memanggang, z, 4
+煮る, にる, Merebus (dengan bumbu), z, 4
+ゆでる, ゆでる, Merebus (air), z, 4
+蒸す, むす, Mengukus, z, 4
+いためる, いためる, Menumis, z, 4
+揚げる, あげる, Menggoreng (deep-fry), z, 4
+サラダ, サラダ, Salad, z, 4
+餃子, ぎょうざ, Gyoza, z, 4
+家庭料理, かていりょうり, Masakan rumah, z, 4
+フェイジョアーダ, フェイジョアーダ, Feijoada, z, 4
+モモ, モモ, Momo, z, 4
+ガドガド, ガドガド, Gado-gado, z, 4
+麻花, マーホア, Mahua, z, 4
+中国, ちゅうごく, Tiongkok / Cina, z, 4
+豆, まめ, Kacang, z, 4
+小麦粉, こむぎこ, Tepung terigu, z, 4
+ピーナッツソース, ピーナッツソース, Saus kacang, z, 4
+皮, かわ, Kulit (gyoza), z, 4
+ゆで卵, ゆでたまご, Telur rebus, z, 4
+～など, ～など, ～ dll., z, 4
+甘辛い, あまからい, Manis pedas, z, 4
+固い, かたい, Keras, z, 4
+どれも, どれも, Yang mana pun, z, 4
+～屋, ～や, Toko ～, z, 4
+ボリューム, ボリューム, Volume / Porsi, z, 4
+満足（な）, まんぞく（な）, Puas, z, 4
+おばちゃん, おばちゃん, Bibi / Tante, z, 4
+リーズナブル（な）, リーズナブル（な）, Terjangkau, z, 4
+頼む, たのむ, Memesan, z, 4
+煮込みハンバーグ, にこみハンバーグ, Bistik hamburger rebus, z, 4
+～前, ～まえ, Sebelum ～, z, 4
+おすすめする, おすすめする, Merekomendasikan, z, 4
+やっている, やっている, Menjalankan (toko), z, 4
+時間がかかる, じかんがかかる, Butuh waktu, z, 4
+値段, ねだん, Harga, z, 4
+その他, そのた, Lain-lain, z, 4
+
+自然, しぜん, Alam, z, 5
+豊か（な）, ゆたか（な）, Kaya / Berlimpah, z, 5
+暖かい, あたたかい, Hangat, z, 5
+込んでいる, こんでいる, Ramai / Penuh sesak, z, 5
+遊ぶ, あそぶ, Bermain / Bersenang-senang, z, 5
+海外, かいがい, Luar negeri, z, 5
+観光客, かんこうきゃく, Wisatawan, z, 5
+人気がある, にんきがある, Populer, z, 5
+北海道, ほっかいどう, Hokkaido, z, 5
+沖縄, おきなわ, Okinawa, z, 5
+一日中, いちにちじゅう, Sepanjang hari, z, 5
+新鮮（な）, しんせん（な）, Segar, z, 5
+ウニ, ウニ, Bulu babi, z, 5
+シュノーケリング, シュノーケリング, Snorkeling, z, 5
+番組, ばんぐみ, Program (TV/radio), z, 5
+いつか, いつか, Suatu hari nanti, z, 5
+やっぱり, やっぱり, Ternyata / Seperti diduga, z, 5
+ラッシュ, ラッシュ, Jam sibuk, z, 5
+水族館, すいぞくかん, Akuarium, z, 5
+ボート, ボート, Perahu, z, 5
+サイクリング, サイクリング, Bersepeda, z, 5
+遊園地, ゆうえんち, Taman hiburan, z, 5
+温泉, おんせん, Pemandian air panas, z, 5
+行き先, いきさき, Tujuan, z, 5
+湖, みずうみ, Danau, z, 5
+レンタサイクル, レンタサイクル, Rental sepeda, z, 5
+先輩, せんぱい, Senior, z, 5
+出発する, しゅっぱつする, Berangkat, z, 5
+ごめんなさい, ごめんなさい, Maaf., z, 5
+旅行, りょこう, Perjalanan / Wisata, z, 5
+泊まる, とまる, Menginap, z, 5
+ホテル, ホテル, Hotel, z, 5
+旅館, りょかん, Penginapan (Jepang), z, 5
+民宿, みんしゅく, Penginapan (rumah warga), z, 5
+交通手段, こうつうしゅだん, Alat transportasi, z, 5
+バス, バス, Bus, z, 5
+電車, でんしゃ, Kereta, z, 5
+船, ふね, Kapal, z, 5
+飛行機, ひこうき, Pesawat terbang, z, 5
+車, くるま, Mobil, z, 5
+準備する, じゅんびする, Mempersiapkan, z, 5
+スキー板, スキーいた, Papan ski, z, 5
+スキーウェア, スキーウェア, Pakaian ski, z, 5
+手袋, てぶくろ, Sarung tangan, z, 5
+サングラス, サングラス, Kacamata hitam, z, 5
+水着, みずぎ, Pakaian renang, z, 5
+日光, にっこう, Nikko, z, 5
+紅葉, こうよう, Momiji (daun musim gugur), z, 5
+かなり, かなり, Cukup, z, 5
+厚い, あつい, Tebal, z, 5
+上着, うわぎ, Jaket / Pakaian luar, z, 5
+奈良, なら, Nara, z, 5
+小さな, ちいさな, Kecil, z, 5
+宿, やど, Penginapan, z, 5
+時期, じき, Musim / Waktu, z, 5
+込む, こむ, Ramai / Penuh, z, 5
+計画, けいかく, Rencana, z, 5
+立てる, たてる, Membuat (rencana), z, 5
+調べる, しらべる, Mencari tahu / Memeriksa, z, 5
+富山, とやま, Toyama, z, 5
+くわしい, くわしい, Detail / Tahu betul, z, 5
+回転ずし, かいてんずし, Sushi putar, z, 5
+並ぶ, ならぶ, Mengantre / Berbaris, z, 5
+長野, ながの, Nagano, z, 5
+日焼けする, ひやけする, Terbakar matahari, z, 5
+スキー, スキー, Ski, z, 5
+スキー場, スキーじょう, Resor ski, z, 5
+こっち, こっち, Sini, z, 5
+撮る, とる, Mengambil (foto/video), z, 5
+オルゴール, オルゴール, Kotak musik, z, 5
+美術館, びじゅつかん, Museum seni, z, 5
+ロープウェイ, ロープウェイ, Kereta gantung, z, 5
+湖, みずうみ, Danau, z, 5
+そば, そば, Di samping ～, z, 5
+露天風呂, ろてんぶろ, Pemandian (terbuka), z, 5
+日帰り, ひがえり, Pergi pulang hari, z, 5
+まったく～ない, まったく～ない, Sama sekali tidak ～, z, 5
+寄る, よる, Mampir, z, 5
+意外に, いがいに, Ternyata, z, 5
+楽しむ, たのしむ, Menikmati, z, 5
+宿泊, しゅくはく, Akomodasi / Penginapan, z, 5
+観光, かんこう, Wisata / Tamasya, z, 5
+グルメ, グルメ, Kuliner, z, 5
+旅券, りょけん, Tiket transportasi, z, 5
+口コミ, くちコミ, Ulasan / Dari mulut ke mulut, z, 5
+投稿する, とうこうする, Memposting, z, 5
+～のまわり, ～のまわり, Di sekitar ～, z, 5
+帰り, かえり, Saat pulang, z, 5
+
+～発, ～はつ, Berangkat jam ～, z, 6
+～着, ～ちゃく, Tiba jam ～, z, 6
+～号, ～ごう, (Kereta) Nomor ～, z, 6
+～号車, ～ごうしゃ, Gerbong Nomor ～, z, 6
+～席, ～せき, Kursi ～, z, 6
+特急券, とっきゅうけん, Tiket limited express, z, 6
+秋田, あきた, Akita, z, 6
+こまち, こまち, Komachi, z, 6
+通路側, つうろがわ, Kursi dekat lorong, z, 6
+窓側, まどがわ, Kursi dekat jendela, z, 6
+遅れ, おくれ, Keterlambatan, z, 6
+約, やく, Sekitar, z, 6
+～両編成, ～りょうへんせい, Rangkaian ～ gerbong, z, 6
+運転見合わせ, うんてんみあわせ, (Layanan) Ditangguhkan, z, 6
+お知らせ, おしらせ, Pengumuman, z, 6
+台風～号, たいふう～ごう, Topan No. ～, z, 6
+接近, せっきん, Mendekat, z, 6
+～に伴い, ～にともない, Sehubungan dengan ～, z, 6
+見合わせる, みあわせる, Menunda, z, 6
+ゆば, ゆば, Kulit tahu, z, 6
+外国, がいこく, Luar negeri, z, 6
+～泊, ～はく, ～ malam (menginap), z, 6
+名物, めいぶつ, Makanan khas, z, 6
+東照宮, とうしょうぐう, Kuil Toshogu, z, 6
+中禅寺湖, ちゅうぜんじこ, Danau Chuzenji, z, 6
+指定席, していせき, Kursi reservasi, z, 6
+自由席, じゆうせき, Kursi non-reservasi, z, 6
+～番乗り場, ～ばんのりば, Peron nomor ～, z, 6
+～番線, ～ばんせん, Jalur nomor ～, z, 6
+～行, ～いき／ゆき, Tujuan ～, z, 6
+～線, ～せん, Jalur ～, z, 6
+～方面, ～ほうめん, Arah ～, z, 6
+発車する, はっしゃする, Berangkat, z, 6
+到着する, とうちゃくする, Tiba, z, 6
+乗り換える, のりかえる, Transit / Ganti (kereta), z, 6
+特急, とっきゅう, Limited express, z, 6
+～両, ～りょう, ～ gerbong, z, 6
+順, じゅん, Sesuai urutan, z, 6
+グリーン車, グリーンしゃ, Gerbong Green (kelas 1), z, 6
+金沢, かなざわ, Kanazawa, z, 6
+列車, れっしゃ, Kereta api, z, 6
+乗車, じょうしゃ, Naik kereta, z, 6
+～ほど, ～ほど, Sekitar ～, z, 6
+岡山, おかやま, Okayama, z, 6
+お出口, おでぐち, Pintu keluar, z, 6
+左側, ひだりがわ, Sisi kiri, z, 6
+各駅, かくえき, Setiap stasiun, z, 6
+向かい側, むかいがわ, Sisi seberang, z, 6
+中ほど, なかほど, Bagian tengah, z, 6
+ご案内をいたします, ごあんないをいたします, (Kami akan) Memberikan pengumuman., z, 6
+お越しください, おこしください, Silakan datang ke ～., z, 6
+事故, じこ, Kecelakaan, z, 6
+壊れる, こわれる, Rusak, z, 6
+信号, しんごう, Sinyal / Lampu lalu lintas, z, 6
+信号故障, しんごうこしょう, Kerusakan sinyal, z, 6
+アナウンス, アナウンス, Pengumuman, z, 6
+困る, こまる, Kesulitan / Bingung, z, 6
+なんて言ってましたか？, なんていってましたか？, Tadi bilang apa?, z, 6
+当駅, とうえき, Stasiun ini, z, 6
+～のため, ～のため, Karena ～, z, 6
+運転, うんてん, Operasi (kereta), z, 6
+お急ぎのところ, おいそぎのところ, Saat Anda sedang terburu-buru, z, 6
+お知らせいたします, おしらせいたします, (Kami akan) Menginformasikan., z, 6
+行っております, おこなっております, Sedang melakukan., z, 6
+ご迷惑をおかけします, ごめいわくをおかけします, Mohon maaf atas ketidaknyamanannya., z, 6
+人身事故, じんしんじこ, Kecelakaan (melibatkan orang), z, 6
+影響, えいきょう, Pengaruh / Dampak, z, 6
+全線, ぜんせん, Seluruh jalur, z, 6
+お越し, おこし, Datang / Menuju ke, z, 6
+ご利用ください, ごりようください, Silakan gunakan., z, 6
+感動する, かんどうする, Terharu / Terkesan, z, 6
+気持ちいい, きもちいい, Menyenangkan / Nyaman, z, 6
+残念（な）, ざんねん（な）, Sayang sekali / Mengecewakan, z, 6
+疲れる, つかれる, Lelah, z, 6
+びっくりする, びっくりする, Kaget, z, 6
+驚く, おどろく, Terkejut, z, 6
+こわい, こわい, Takut / Menakutkan, z, 6
+よかった, よかった, Syukurlah / Baguslah, z, 6
+大阪, おおさか, Osaka, z, 6
+串カツ, くしカツ, Kushi-katsu, z, 6
+たこ焼き, たこやき, Takoyaki, z, 6
+登る, のぼる, Mendaki / Naik, z, 6
+あべのハルカス, あべのハルカス, Abeno Harukas, z, 6
+大阪城, おおさかじょう, Istana Osaka, z, 6
+通天閣, つうてんかく, Menara Tsutenkaku, z, 6
+鳥, とり, Burung, z, 6
+あげる, あげる, Memberi, z, 6
+つり, つり, Memancing, z, 6
+空, そら, Langit, z, 6
+ウミネコ, ウミネコ, Burung camar ekor hitam, z, 6
+あの辺, あのへん, Sekitar sana, z, 6
+浄土ヶ浜, じょうどがはま, Pantai Jodogahama, z, 6
+ケーブルカー, ケーブルカー, Kereta kabel, z, 6
+歩く, あるく, Berjalan kaki, z, 6
+リス, リス, Tupai, z, 6
+だから, だから, Makanya / Oleh karena itu, z, 6
+あきらめる, あきらめる, Menyerah, z, 6
+頂上, ちょうじょう, Puncak, z, 6
+高尾山, たかおさん, Gunung Takao, z, 6
+町並み, まちなみ, Pemandangan kota, z, 6
+花畑, はなばたけ, Ladang bunga, z, 6
+イルミネーション, イルミネーション, Iluminasi (lampu hias), z, 6
+ショー, ショー, Pertunjukan, z, 6
+泊まる, とまる, Menginap, z, 6
+滝, たき, Air terjun, z, 6
+きらきら, きらきら, Berkilauan / Berkelip, z, 6
+光る, ひかる, Bersinar, z, 6
+ハウステンボス, ハウステンボス, Huis Ten Bosch, z, 6
+オランダ, オランダ, Belanda, z, 6
+インスタントラーメン, インスタントラーメン, Mi instan, z, 6
+描く, かく, Menggambar, z, 6
+カップラーメン, カップラーメン, Mi gelas, z, 6
+絵, え, Gambar, z, 6
+トッピング, トッピング, Topping, z, 6
+
+おみこし, おみこし, Tandu (Dewa), z, 7
+かつぐ, かつぐ, Memikul, z, 7
+海岸, かいがん, Pantai, z, 7
+ごみ, ごみ, Sampah, z, 7
+拾う, ひろう, Memungut, z, 7
+出る, でる, (Air) Mengalir / Keluar, z, 7
+地震, じしん, Gempa bumi, z, 7
+火事, かじ, Kebakaran, z, 7
+訓練, くんれん, Latihan, z, 7
+断水（する）, だんすい（する）, Air mati / Pasokan air terputus, z, 7
+水道工事, すいどうこうじ, Perbaikan saluran air, z, 7
+濁る, にごる, Menjadi keruh, z, 7
+使用する, しようする, Menggunakan, z, 7
+お知らせ, おしらせ, Pengumuman, z, 7
+下記の通り, かきのとおり, Sebagai berikut, z, 7
+しばらく, しばらく, Sebentar, z, 7
+出す, だす, Mengeluarkan (air), z, 7
+迷惑, めいわく, Ketidaknyamanan, z, 7
+ご協力お願いいたします, ごきょうりょくおねがいいたします, Mohon kerja samanya., z, 7
+防災, ぼうさい, Kesiapan bencana, z, 7
+小学校, しょうがっこう, Sekolah dasar, z, 7
+校庭, こうてい, Lapangan sekolah, z, 7
+雨天, うてん, Cuaca hujan, z, 7
+場合, ばあい, Jika / Dalam kasus, z, 7
+内容, ないよう, Isi / Detail, z, 7
+通報訓練, つうほうくんれん, Latihan melapor, z, 7
+避難訓練, ひなんくんれん, Latihan evakuasi, z, 7
+消火訓練, しょうかくうれん, Latihan pemadaman api, z, 7
+AED訓練, エーイーディーくんれん, Latihan AED, z, 7
+隣近所の人, となりきんじょのひと, Tetangga, z, 7
+声をかけあう, こえをかけあう, Saling menyapa, z, 7
+条件, じょうけん, Syarat / Kondisi, z, 7
+運動靴, うんどうぐつ, Sepatu olahraga, z, 7
+動きやすい, うごきやすい, Mudah bergerak, z, 7
+はっぴ, はっぴ, Mantel Happi, z, 7
+貸し出し, かしだし, Peminjaman / Rental, z, 7
+希望, きぼう, Harapan / Keinginan, z, 7
+申し込む, もうしこむ, Mendaftar, z, 7
+集合, しゅうごう, Berkumpul, z, 7
+ジーンズ, ジーンズ, Jins, z, 7
+当日, とうじつ, Pada hari H, z, 7
+おいでください, おいでください, Silakan datang., z, 7
+延期する, えんきする, Menunda, z, 7
+持ち物, もちもの, Barang bawaan, z, 7
+汚れる, よごれる, Menjadi kotor, z, 7
+軍手, ぐんて, Sarung tangan kerja, z, 7
+～程度, ～ていど, Sekitar ～, z, 7
+作業, さぎょう, Pekerjaan / Tugas, z, 7
+世話役, せわやく, Fasilitator / Penyelenggara, z, 7
+会, かい, Perkumpulan / Grup, z, 7
+ガス, ガス, Gas, z, 7
+点検, てんけん, Inspeksi / Pemeriksaan, z, 7
+フリーマーケット, フリーマーケット, Pasar loak, z, 7
+祭, まつり, Festival, z, 7
+寄付, きふ, Donasi, z, 7
+お願い, おねがい, Permintaan, z, 7
+花火大会, はなびたいかい, Festival kembang api, z, 7
+今月, こんげつ, Bulan ini, z, 7
+来月, らいげつ, Bulan depan, z, 7
+ポスト, ポスト, Kotak pos, z, 7
+ガス会社, ガスがいしゃ, Perusahaan gas, z, 7
+間, あいだ, Antara, z, 7
+封筒, ふうとう, Amplop, z, 7
+手紙, てがみ, Surat, z, 7
+～だけ, ～だけ, Hanya ～, z, 7
+中止, ちゅうし, Batal, z, 7
+広場, ひろば, Alun-alun / Lapangan, z, 7
+～回目, ～かいめ, Ke-～, z, 7
+食器, しょっき, Alat makan, z, 7
+おもちゃ, おもちゃ, Mainan, z, 7
+コンサート, コンサート, Konser, z, 7
+販売会, はんばいかい, Acara penjualan, z, 7
+カラオケ大会, カラオケたいかい, Lomba karaoke, z, 7
+ブラスバンド, ブラスバンド, Drimben, z, 7
+演奏, えんそう, Penampilan musik, z, 7
+踊り, おどり, Tarian, z, 7
+練習, れんしゅう, Latihan, z, 7
+道の駅, みちのえき, Michi-no-eki (Rest area), z, 7
+公民館, こうみんかん, Balai warga, z, 7
+市民センター, しみんセンター, Pusat kegiatan warga, z, 7
+～において, ～において, Di ～, z, 7
+開催する, かいさいする, Mengadakan, z, 7
+入場券, にゅうじょうけん, Tiket masuk, z, 7
+販売中, はんばいちゅう, Sedang dijual, z, 7
+ピアノの夕べ, ピアノのゆうべ, Malam alunan piano, z, 7
+および, および, Dan, z, 7
+～からお知らせします, ～からおしらせします, Pengumuman dari ～., z, 7
+皆様のご来場をお待ちしています, みなさまのごらいじょうをおまちしています, Kami menantikan kedatangan Anda., z, 7
+明日, あす, Besok, z, 7
+行う, おこなう, Melakukan, z, 7
+見学（する）, けんがく（する）, Observasi / Melihat-lihat, z, 7
+どなたでも, どなたでも, Siapa saja (sopan), z, 7
+～からのお知らせです, ～からのおしらせです, Ini pengumuman dari ～., z, 7
+お気軽にお越しください, おきがるにおこしください, Silakan mampir., z, 7
+～について, ～について, Tentang ～, z, 7
+本日, ほんじつ, Hari ini (formal), z, 7
+開く, ひらく, Mengadakan / Membuka, z, 7
+予定する, よていする, Dijadwalkan, z, 7
+～についてお知らせします, ～についておしらせします, Mengumumkan tentang ～., z, 7
+お誘い合わせの上、お出かけください, おさそいあわせのうえ、おでかけください, Silakan ajak teman/keluarga dan datang., z, 7
+地元, じもと, Lokal / Setempat, z, 7
+農家, のうか, Petani, z, 7
+生産する, せいさんする, Memproduksi, z, 7
+町役場, まちやくば, Balai kota (kecil), z, 7
+盆踊り, ぼんおどり, Tarian Bon Odori, z, 7
+輪になる, わになる, Membentuk lingkaran, z, 7
+～に合わせて, ～にあわせて, Sesuai dengan ～, z, 7
+だれでも, だれでも, Siapa saja, z, 7
+～たち, ～たち, (Jamak untuk orang), z, 7
+一人で, ひとりで, Sendirian, z, 7
+
+イベント会場, イベントかいじょう, Tempat acara, z, 8
+屋台, やたい, Kios/Warung makan, z, 8
+ステージ, ステージ, Panggung, z, 8
+パフォーマンス, パフォーマンス, Pertunjukan, z, 8
+観光紹介, かんこうしょうかい, Pojok informasi wisata, z, 8
+～コーナー, ～コーナー, Pojok ～, z, 8
+スピーチコンテスト, スピーチコンテスト, Lomba pidato, z, 8
+～コンテスト, ～コンテスト, Lomba ～, z, 8
+カラオケ, カラオケ, Karaoke, z, 8
+～大会, ～たいかい, Lomba/Kompetisi ～, z, 8
+合気道, あいきどう, Aikido, z, 8
+～デモンストレーション, ～デモンストレーション, Demonstrasi ～, z, 8
+世界, せかい, Dunia, z, 8
+遊び, あそび, Permainan, z, 8
+～体験, ～たいけん, Pengalaman (mencoba) ～, z, 8
+ファッションショー, ファッションショー, Peragaan busana, z, 8
+～ショー, ～ショー, Pertunjukan ～, z, 8
+スタンプラリー, スタンプラリー, Reli stempel, z, 8
+国際交流, こくさいこうりゅう, Pertukaran internasional, z, 8
+入場料, にゅうじょうりょう, Biaya masuk, z, 8
+交流プラザ, こうりゅうプラザ, Plaza pertukaran, z, 8
+主催, しゅさい, Penyelenggara, z, 8
+協力, きょうりょく, Kerja sama, z, 8
+民族衣装, みんぞくいしょう, Pakaian tradisional, z, 8
+本部, ほんぶ, Kantor pusat, z, 8
+ふれあい, ふれあい, Interaksi / Pengalaman langsung, z, 8
+フラダンス, フラダンス, Tari hula, z, 8
+和太鼓, わだいこ, Drum Jepang, z, 8
+ワールドマーケット, ワールドマーケット, Pasar dunia, z, 8
+トルコ, トルコ, Turki, z, 8
+ペルー, ペルー, Peru, z, 8
+雑貨, ざっか, Barang serba-serbi, z, 8
+団体紹介, だんたいしょうかい, Perkenalan organisasi, z, 8
+民芸品, みんげいひん, Kerajinan rakyat, z, 8
+手芸品, しゅげいひん, Kerajinan tangan, z, 8
+ガーナ, ガーナ, Ghana, z, 8
+フェアトレード, フェアトレード, Perdagangan adil, z, 8
+外国人支援ネットワーク, がいこくじんしえんネットワーク, Jaringan pendukung warga asing, z, 8
+ピニャータ, ピニャータ, Pinata, z, 8
+くす玉割り, くすだまわり, Membuka bola konfeti, z, 8
+中国ゴマ, ちゅうごくゴマ, Diabolo (Gasing Tiongkok), z, 8
+回す, まわす, Memutar, z, 8
+手作り, てづくり, Buatan tangan, z, 8
+やっている, やっている, Mengadakan, z, 8
+まだ, まだ, Masih, z, 8
+受け付け, うけつけ, Resepsionis / Pendaftaran, z, 8
+あっち, あっち, Sebelah sana, z, 8
+つきあたり, つきあたり, Di ujung, z, 8
+やっている, やっている, Mengadakan, z, 8
+まだ, まだ, Masih, z, 8
+受け付け, うけつけ, Resepsionis / Pendaftaran, z, 8
+あっち, あっち, Sebelah sana, z, 8
+つきあたり, つきあたり, Di ujung, z, 8
+中学生, ちゅうがくせい, Siswa SMP, z, 8
+プロ, プロ, Profesional, z, 8
+遠慮する, えんりょする, Menahan diri, z, 8
+出る, でる, Ikut / Berpartisipasi, z, 8
+参加費, さんかひ, Biaya partisipasi, z, 8
+優勝する, ゆうしょうする, Menang juara pertama, z, 8
+賞品, しょうひん, Hadiah, z, 8
+出る, でる, Diberikan (hadiah), z, 8
+楽器, がっき, Alat musik, z, 8
+曲, きょく, Lagu, z, 8
+相談する, そうだんする, Berkonsultasi, z, 8
+申込書, もうしこみしょ, Formulir pendaftaran, z, 8
+必要事項, ひつようじこう, Informasi yang diperlukan, z, 8
+申し込み, もうしこみ, Pendaftaran, z, 8
+先着順, せんちゃくじゅん, Siapa cepat dia dapat, z, 8
+順番に, じゅんばんに, Sesuai urutan, z, 8
+いただく, いただく, Menerima (sopan), z, 8
+スピーチ, スピーチ, Pidato, z, 8
+テーマ, テーマ, Tema, z, 8
+動画, どうが, Video, z, 8
+撮影, さつえい, Pengambilan gambar / Video, z, 8
+飲食, いんしょく, Makan dan minum, z, 8
+販売, はんばい, Penjualan, z, 8
+携帯電話, けいたいでんわ, Telepon seluler, z, 8
+～内, ～ない, Di dalam ～, z, 8
+協力（する）, きょうりょく（する）, Bekerja sama, z, 8
+お子様, おこさま, Anak-anak (sopan), z, 8
+皆様にお願いいたします, みなさまにおねがいいたします, Kami mohon kepada semuanya., z, 8
+お見えです, おみえです, ... telah hadir., z, 8
+ご遠慮ください（ませ）, ごえんりょください（ませ）, Mohon untuk tidak ～., z, 8
+ご協力よろしくお願いいたします, ごきょうりょくよろしくおねがいいたします, Mohon kerja samanya., z, 8
+電源, でんげん, Daya (listrik), z, 8
+切る, きる, Mematikan, z, 8
+マナーモード, マナーモード, Mode senyap, z, 8
+設定する, せっていする, Mengatur, z, 8
+通話（する）, つうわ（する）, Menelepon / Bicara di telepon, z, 8
+お忙しい中, おいそしいなか, Di tengah kesibukan Anda, z, 8
+おいでくださって、ありがとうございます, おいでくださって、ありがとうございます, Terima kasih telah datang., z, 8
+かまいません, かまいません, Tidak masalah., z, 8
+持ち込み, もちこみ, Membawa masuk, z, 8
+禁止, きんし, Dilarang, z, 8
+ロビー, ロビー, Lobi, z, 8
+ロールケーキ, ロールケーキ, Kue gulung, z, 8
+終了する, しゅうりょうする, Selesai / Berakhir, z, 8
+個数, こすう, Jumlah (barang), z, 8
+限られている, かぎられている, Terbatas, z, 8
+列, れつ, Antrean, z, 8
+お求めの, おもとめの, Yang ingin membeli, z, 8
+お並びください, おならびください, Silakan mengantre., z, 8
+太鼓, たいこ, Drum, z, 8
+たたく, たたく, Memukul, z, 8
+来年, らいねん, Tahun depan, z, 8
+バンブーダンス, バンブーダンス, Tari Bambu, z, 8
+バングラデシュ, バングラデシュ, Bangladesh, z, 8
+サテー, サテー, Sate, z, 8
+
+季節, きせつ, Musim, z, 9
+行事, ぎょうじ, Acara, z, 9
+正月, しょうがつ, Tahun Baru, z, 9
+成人の日, せいじんのひ, Hari Kedewasaan, z, 9
+ひな祭り, ひなまつり, Hinamatsuri (Festival Boneka), z, 9
+こどもの日, こどものひ, Hari Anak, z, 9
+七夕, たなばた, Tanabata (Festival Bintang), z, 9
+クリスマス, クリスマス, Natal, z, 9
+式, しき, Upacara, z, 9
+市長, しちょう, Wali kota, z, 9
+話, はなし, Cerita / Pidato, z, 9
+チキン, チキン, Ayam, z, 9
+笹の葉, ささのは, Daun bambu, z, 9
+飾り, かざり, Dekorasi, z, 9
+つける, つける, Memasang (dekorasi), z, 9
+着物, きもの, Kimono, z, 9
+ちらしずし, ちらしずし, Chirashi-zushi, z, 9
+デートする, デートする, Berkencan, z, 9
+短冊, たんざく, Tanzaku (kertas harapan), z, 9
+願い事, ねがいごと, Permohonan / Harapan, z, 9
+書く, かく, Menulis, z, 9
+甘酒, あまざけ, Amazake, z, 9
+こうして, こうして, Seperti ini, z, 9
+お米, おこめ, Beras, z, 9
+アルコール, アルコール, Alkohol, z, 9
+若い, わかい, Muda, z, 9
+お祝いする, おいわいする, Merayakan, z, 9
+成人式, せいじんしき, Upacara Kedewasaan, z, 9
+おしゃれをする, おしゃれをする, Berdandan, z, 9
+中学校, ちゅうがっこう, Sekolah Menengah Pertama (SMP), z, 9
+盛り上がる, もりあがる, Menjadi meriah / Seru, z, 9
+フライドチキン, フライドチキン, Ayam goreng, z, 9
+必ず, かならず, Pasti / Selalu, z, 9
+過ごす, すごす, Menghabiskan (waktu), z, 9
+DVD, ディーブイディー, DVD, z, 9
+実家, じっか, Rumah orang tua, z, 9
+ごろごろする, ごろごろする, Bersantai / Bermalas-malasan, z, 9
+お年玉, おとしだま, Otoshidama (uang tahun baru), z, 9
+乗り物, のりもの, Wahana, z, 9
+今年, ことし, Tahun ini, z, 9
+親戚, しんせき, Kerabat / Saudara, z, 9
+集まる, あつまる, Berkumpul, z, 9
+毎年, まいとし, Setiap tahun, z, 9
+甥, おい, Keponakan (laki-laki), z, 9
+姪, めい, Keponakan (perempuan), z, 9
+あけましておめでとうございます, あけましておめでとうございます, Selamat Tahun Baru., z, 9
+祭り, まつり, Festival, z, 9
+田舎, いなか, Kampung halaman, z, 9
+飾る, かざる, Menghias / Memajang, z, 9
+特別（な）, とくべつ（な）, Spesial / Khusus, z, 9
+パーティー, パーティー, Pesta, z, 9
+歌う, うたう, Menyanyi, z, 9
+踊る, おどる, Menari, z, 9
+お金, おかね, Uang, z, 9
+断食, だんじき, Puasa, z, 9
+～明け, ～あけ, Setelah ～, z, 9
+旧暦, きゅうれき, Kalender lunar, z, 9
+キリスト教, キリストきょう, Agama Kristen, z, 9
+お祝い, おいわい, Perayaan, z, 9
+水かけ祭り, みずかけまつり, Festival Perang Air, z, 9
+年, とし, Tahun, z, 9
+～によって, ～によって, Tergantung pada ～, z, 9
+春節, しゅんせつ, Tahun Baru Imlek, z, 9
+ソンクラーン, ソンクラーン, Songkran, z, 9
+レバラン, レバラン, Lebaran, z, 9
+海外旅行, かいがいりょこう, Perjalanan luar negeri, z, 9
+赤い, あかい, Merah, z, 9
+かけ合う, かけあう, Saling melempar / menyiram, z, 9
+クトゥパット, クトゥパット, Ketupat, z, 9
+餃子, ぎょうざ, Gyoza / Pangsit, z, 9
+豚, ぶた, Babi, z, 9
+丸焼き, まるやき, Panggang utuh, z, 9
+クッキー, クッキー, Kue kering, z, 9
+大切（な）, たいせつ（な）, Penting, z, 9
+どんなふうに, どんなふうに, Bagaimana caranya, z, 9
+祝う, いわう, Merayakan, z, 9
+赤, あか, (Warna) Merah, z, 9
+おめでたい, おめでたい, (Penuh) Selamat / Perayaan, z, 9
+色, いろ, Warna, z, 9
+イスラム教, イスラムきょう, Agama Islam, z, 9
+ラマダン, ラマダン, Ramadan, z, 9
+例えば, たとえば, Contohnya, z, 9
+飾りつけ, かざりつけ, Dekorasi, z, 9
+半分, はんぶん, Setengah, z, 9
+餅つき, もちつき, Menumbuk mochi, z, 9
+当日, とうじつ, Pada hari H, z, 9
+大人, おとな, Dewasa, z, 9
+味わう, あじわう, Mencicipi / Menikmati, z, 9
+伝統的（な）, でんとうてき（な）, Tradisional, z, 9
+文化, ぶんか, Budaya, z, 9
+感想, かんそう, Kesan, z, 9
+語る, かたる, Bercerita / Berbicara, z, 9
+活動報告, かつどうほうこく, Laporan kegiatan, z, 9
+実際に, じっさいに, Sebenarnya / Pada kenyataannya, z, 9
+杵, きね, Palu (untuk mochi), z, 9
+体験する, たいけんする, Mengalami / Mencoba, z, 9
+つきたて, つきたて, Baru jadi (ditumbuk), z, 9
+お餅, おもち, Mochi, z, 9
+きなこ, きなこ, Kinako (tepung kedelai), z, 9
+あんこ, あんこ, Anko (pasta kacang merah), z, 9
+餅をつく, もちをつく, Menumbuk mochi, z, 9
+チームワーク, チームワーク, Kerja sama tim, z, 9
+トック, トック, Tteok (kue beras Korea), z, 9
+思ったより（も）, おもったより（も）, Lebih dari yang dikira, z, 9
+昨年, さくねん, Tahun lalu, z, 9
+昨年はいろいろお世話になりました, さくねんはいろいろおせわになりました, Terima kasih atas bantuan Anda tahun lalu., z, 9
+今年もよろしくお願いします, ことしもよろしくおねがいします, Mohon bantuannya lagi tahun ini., z, 9
+あけおめ, あけおめ, Met Taun Baru (singk.), z, 9
+ことよろ, ことよろ, Mohon bantuannya (singk.), z, 9
+謹賀新年, きんがしんねん, Selamat Tahun Baru (formal), z, 9
+遊ぼう, あそぼう, Ayo main, z, 9
+また遊ぼうね, またあそぼうね, Main lagi ya nanti!, z, 9
+
+葬式, そうしき, Pemakaman, z, 10
+スーツ, スーツ, Setelan (jas), z, 10
+暗い, くらい, Gelap, z, 10
+地味（な）, じみ（な）, Sederhana / Polos, z, 10
+ジャケット, ジャケット, Jaket, z, 10
+香典, こうでん, Uang belasungkawa, z, 10
+香典袋, こうでんぶくろ, Amplop uang belasungkawa, z, 10
+～用, ～よう, Untuk ～, z, 10
+披露宴, ひろうえん, Resepsi (pernikahan), z, 10
+招待状, しょうたいじょう, Surat undangan, z, 10
+だったら, だったら, Kalau begitu, z, 10
+カジュアル（な）, カジュアル（な）, Kasual, z, 10
+感じ, かんじ, Kesan / Penampilan, z, 10
+白, しろ, Putih, z, 10
+花嫁, はなよめ, Mempelai wanita, z, 10
+見舞い, みまい, Menjenguk (orang sakit), z, 10
+同僚, どうりょう, Rekan kerja, z, 10
+骨, ほね, Tulang, z, 10
+折る, おる, Mematahkan (tulang), z, 10
+入院する, にゅういんする, Masuk rumah sakit, z, 10
+鉢植え, はちうえ, Tanaman pot, z, 10
+イメージ, イメージ, Citra / Gambaran, z, 10
+花束, はなたば, Buket bunga, z, 10
+本人, ほんにん, Orangnya (yang bersangkutan), z, 10
+まあ, まあ, Wah!, z, 10
+あら, あら, Oh!, z, 10
+どうすればいいですか？, どうすればいいですか？, Sebaiknya saya bagaimana?, z, 10
+新築祝い, しんちくいわい, Hadiah pindah rumah baru, z, 10
+習慣, しゅうかん, Kebiasaan / Adat, z, 10
+全員, ぜんいん, Semua orang, z, 10
+くり返す, くりかえす, Mengulang, z, 10
+オトーリ, オトーリ, Otoori, z, 10
+待つ, まつ, Menunggu, z, 10
+流す, ながす, Menyiram (flush), z, 10
+ごみ箱, ごみばこ, Tempat sampah, z, 10
+捨てる, すてる, Membuang, z, 10
+電話, でんわ, Telepon, z, 10
+片づける, かたづける, Membereskan, z, 10
+掃除の人, そうじのひと, Petugas kebersihan, z, 10
+不思議（な）, ふしぎ（な）, Aneh, z, 10
+めんどくさい, めんどくさい, Merepotkan, z, 10
+まじめ（な）, まじめ（な）, Serius, z, 10
+まねをする, まねをする, Meniru, z, 10
+ルール, ルール, Aturan, z, 10
+守る, まもる, Mematuhi (aturan), z, 10
+貼り紙, はりがみ, Tanda / Pengumuman tempel, z, 10
+もちろん, もちろん, Tentu saja, z, 10
+つまる, つまる, Tersumbat, z, 10
+それじゃあ, それじゃあ, Kalau begitu, z, 10
+臭い, くさい, Bau, z, 10
+普通に, ふつうに, Secara normal / Biasa saja, z, 10
+うるさい, うるさい, Berisik, z, 10
+～終わる, ～おわる, Selesai ～, z, 10
+席, せき, Kursi, z, 10
+確かにねえ, たしかにねえ, Benar juga ya., z, 10
+どうしてかなあ, どうしてかなあ, Kenapa ya?, z, 10
+～かな？, ～かな？, ...ya?, z, 10
+のどが渇く, のどがかわく, Haus, z, 10
+かご, かご, Keranjang, z, 10
+空, から, Kosong, z, 10
+ボトル, ボトル, Botol, z, 10
+そうしたら, そうしたら, Lalu / Setelah itu, z, 10
+怒る, おこる, Marah, z, 10
+ちゃんと, ちゃんと, Dengan benar, z, 10
+店長, てんちょう, Manajer toko, z, 10
+泥棒, どろぼう, Pencuri, z, 10
+イメージ, イメージ, Kesan / Citra, z, 10
+袋, ふくろ, Kantong, z, 10
+あとから, あとから, Belakangan, z, 10
+どうしたの？, どうしたの？, Ada apa?, z, 10
+そうなの？, そうなの？, Oh ya?, z, 10
+そうかなあ, そうかなあ, Masa sih?, z, 10
+だんだん, だんだん, Berangsur-angsur, z, 10
+気に入る, きにいる, Mulai suka, z, 10
+直接, ちょくせつ, Langsung, z, 10
+～杯, ～はい, ～ gelas/cangkir, z, 10
+お金を取る, おかねをとる, Memungut biaya, z, 10
+ひどい, ひどい, Parah / Kejam, z, 10
+信じられない, しんじられない, Tidak bisa dipercaya, z, 10
+信じる, しんじる, Percaya, z, 10
+チップ, チップ, Tip (uang), z, 10
+マナー, マナー, Tata krama, z, 10
+ズズズズ, ズズズズ, Sluurp, z, 10
+音を立てる, おとをたてる, Menimbulkan suara, z, 10
+どんぶり, どんぶり, Mangkuk (besar), z, 10
+持ち上げる, もちあげる, Mengangkat, z, 10
+口を付ける, くちをつける, Menempelkan ke mulut, z, 10
+嫌（な）, いや（な）, Tidak suka / Menjijikkan, z, 10
+何杯でも, なんばいでも, Berapa gelas pun, z, 10
+おかわり, おかわり, Isi ulang / Tambah, z, 10
+おしぼり, おしぼり, Handuk basah (oshibori), z, 10
+テーブルチャージ, テーブルチャージ, Biaya meja (cover charge), z, 10
+しかも, しかも, Terlebih lagi, z, 10
+こういう, こういう, Yang seperti ini, z, 10
+ごちそうさま, ごちそうさま, Terima kasih (setelah makan), z, 10
+どちらでもない, どちらでもない, Bukan keduanya, z, 10
+
+色, いろ, Warna, z, 11
+サイズ, サイズ, Ukuran, z, 11
+赤, あか, Merah, z, 11
+青, あお, Biru, z, 11
+緑, みどり, Hijau, z, 11
+黄色, きいろ, Kuning, z, 11
+黒, くろ, Hitam, z, 11
+白, しろ, Putih, z, 11
+ベージュ, ベージュ, Krem, z, 11
+ピンク, ピンク, Merah muda, z, 11
+茶色, ちゃいろ, Cokelat, z, 11
+グレー, グレー, Abu-abu, z, 11
+カーキ, カーキ, Khaki, z, 11
+S, エス, S (Kecil), z, 11
+M, エム, M (Sedang), z, 11
+L, エル, L (Besar), z, 11
+XL, エックスエル, XL (Ekstra Besar), z, 11
+フリー, フリー, Satu ukuran, z, 11
+～cm, ～センチ, ～ cm, z, 11
+ただいま, ただいま, Saat ini, z, 11
+全品, ぜんぴん, Semua barang, z, 11
+～％オフ, ～パーセントオフ, Diskon ～ %, z, 11
+セーター, セーター, Sweter, z, 11
+試着室, しちゃくしつ, Kamar pas, z, 11
+派手（な）, はで（な）, Mencolok, z, 11
+試着（する）, しちゃく（する）, Mencoba (pakaian), z, 11
+よろしければ, よろしければ, Jika berkenan, z, 11
+ごゆっくりごらんください, ごゆっくりごらんください, Silakan lihat-lihat dengan santai., z, 11
+ご案内いたします, ごあんないいたします, Akan saya antarkan., z, 11
+駐輪場, ちゅうりんじょう, Tempat parkir sepeda, z, 11
+インフォメーション, インフォメーション, Pusat informasi, z, 11
+フードコート, フードコート, Pujasera, z, 11
+探す, さがす, Mencari, z, 11
+レシート, レシート, Struk, z, 11
+救急車, きゅうきゅうしゃ, Ambulans, z, 11
+盗む, ぬすむ, Mencuri, z, 11
+停める, とめる, Memarkir, z, 11
+移動する, いどうする, Berpindah, z, 11
+急に, きゅうに, Tiba-tiba, z, 11
+ソファ, ソファ, Sofa, z, 11
+さっき, さっき, Tadi, z, 11
+もしかしたら, もしかしたら, Mungkin, z, 11
+とる, とる, Mengambil / Mencuri, z, 11
+ポイントカード, ポイントカード, Kartu poin, z, 11
+スタンプ, スタンプ, Cap, z, 11
+押す, おす, Menekan / Mengecap, z, 11
+どうなさいましたか？, どうなさいましたか？, Ada yang bisa dibantu?, z, 11
+お持ちください, おもちください, Silakan bawa., z, 11
+警察, けいさつ, Polisi, z, 11
+気分が悪い, きぶんがわるい, Merasa tidak enak badan, z, 11
+会員証, かいいんしょう, Kartu anggota, z, 11
+お書きください, おかきください, Silakan tulis., z, 11
+どうなさいますか？, どうなさいますか？, Mau bagaimana?, z, 11
+特徴, とくちょう, Ciri-ciri, z, 11
+値段, ねだん, Harga, z, 11
+機種, きしゅ, Model, z, 11
+なくす, なくす, Menghilangkan, z, 11
+届く, とどく, Diserahkan / Sampai, z, 11
+スマートフォン／スマホ, スマートフォン／スマホ, Ponsel pintar, z, 11
+カバー, カバー, Casing / Penutup, z, 11
+ついている, ついている, Ada / Terpasang, z, 11
+買い物する, かいものする, Berbelanja, z, 11
+気づく, きづく, Menyadari, z, 11
+そのような, そのような, Yang seperti itu, z, 11
+つながる, つながる, Tersambung, z, 11
+見つかる, みつかる, Ditemukan, z, 11
+遺失物届, いしつぶつとどけ, Laporan kehilangan barang, z, 11
+連絡をとる, れんらくをとる, Menghubungi, z, 11
+お調べいたします, おしらべいたします, Akan saya periksa., z, 11
+落とし物, おとしもの, Barang tertinggal, z, 11
+案内, あんない, Informasi, z, 11
+呼び出し, よびだし, Panggilan, z, 11
+営業時間, えいぎょうじかん, Jam operasional, z, 11
+セール, セール, Obral, z, 11
+延長する, えんちょうする, Memperpanjang, z, 11
+営業する, えいぎょうする, Beroperasi / Buka, z, 11
+レストラン街, レストランがい, Area restoran, z, 11
+開催中, かいさいちゅう, Sedang berlangsung, z, 11
+通常どおり, つうじょうどおり, Seperti biasa, z, 11
+くり返しご案内いたします, くりかえしごあんないいたします, Sekali lagi kami umumkan., z, 11
+先ほど, さきほど, Tadi (formal), z, 11
+婦人服, ふじんふく, Pakaian wanita, z, 11
+～売り場, ～うりば, Area penjualan ～, z, 11
+お買い上げ, おかいあげ, Pembelian, z, 11
+恐れ入りますが, おそれいりますが, Maaf merepotkan, tapi..., z, 11
+お呼び出しを申し上げます, およびだしをもうしあげます, Kami panggilkan (seseorang)., z, 11
+お伝えしたいことがございます, おつたえしたいことがございます, Ada yang ingin kami sampaikan., z, 11
+お越しください, おこしください, Silakan datang ke ～., z, 11
+男性用, だんせいよう, Untuk pria, z, 11
+かぎ, かぎ, Kunci, z, 11
+心当たり, こころあたり, Ingat / Tahu, z, 11
+インフォメーションカウンター, インフォメーションカウンター, Meja informasi, z, 11
+～フェア, ～フェア, Pameran ～, z, 11
+海の幸, うみのさち, Hasil laut, z, 11
+スイーツ, スイーツ, Makanan manis (Sweets), z, 11
+秋の味覚, あきのみかく, Cita rasa musim gugur, z, 11
+～限り, ～かぎり, Hanya ～, z, 11
+札幌, さっぽろ, Sapporo, z, 11
+機会, きかい, Kesempatan, z, 11
+ご来場を心からお待ちしております, ごらいじょうをこころからおまちしております, Kami tunggu kedatangan Anda., z, 11
+
+電気製品, でんきせいひん, Produk elektronik, z, 12
+冷蔵庫, れいぞうこ, Kulkas, z, 12
+洗濯機, せんたくき, Mesin cuci, z, 12
+電子レンジ, でんしレンジ, Microwave, z, 12
+掃除機, そうじき, Penyedot debu, z, 12
+ポット, ポット, Teko (listrik), z, 12
+パソコン, パソコン, Komputer pribadi / Laptop, z, 12
+タブレット, タブレット, Tablet, z, 12
+イヤホン, イヤホン, Earphone, z, 12
+扇風機, せんぷうき, Kipas angin, z, 12
+ストーブ, ストーブ, Kompor (pemanas), z, 12
+ヒーター, ヒーター, Pemanas, z, 12
+ドライヤー, ドライヤー, Pengering rambut, z, 12
+アイロン, アイロン, Setrika, z, 12
+モデル, モデル, Model, z, 12
+音, おと, Suara, z, 12
+デザイン, デザイン, Desain, z, 12
+商品, しょうひん, Produk, z, 12
+送料, そうりょう, Ongkos kirim, z, 12
+無料, むりょう, Gratis, z, 12
+お店の人, おみせのひと, Pegawai toko, z, 12
+相談（する）, そうだん（する）, Berkonsultasi, z, 12
+届く, とどく, Terkirim / Sampai, z, 12
+店員, てんいん, Pegawai toko, z, 12
+便利（な）, べんり（な）, Praktis, z, 12
+すぐ, すぐ, Segera, z, 12
+見つかる, みつかる, Ditemukan, z, 12
+高く, たかく, (Harga) Tinggi, z, 12
+売れる, うれる, Terjual, z, 12
+手続き, てつづき, Prosedur, z, 12
+簡単（な）, かんたん（な）, Mudah, z, 12
+メーカー, メーカー, Pabrikan, z, 12
+ワイヤレス, ワイヤレス, Nirkabel, z, 12
+手もと, てもと, Di tangan (saya), z, 12
+電気屋, でんきや, Toko elektronik, z, 12
+国道沿い, こくどうぞい, Sepanjang jalan nasional, z, 12
+開店, かいてん, Pembukaan toko, z, 12
+車を出す, くるまをだす, Memberi tumpangan, z, 12
+フリマサイト, フリマサイト, Situs flea market, z, 12
+家電, かでん, Peralatan rumah tangga, z, 12
+カテゴリー, カテゴリー, Kategori, z, 12
+ブランド, ブランド, Merek, z, 12
+ホーム, ホーム, Beranda, z, 12
+出品, しゅっぴん, (Barang) Dijual, z, 12
+マイページ, マイページ, Halaman saya, z, 12
+住まい, すまい, Untuk rumah, z, 12
+絞り込み, しぼりこみ, Persempit (pencarian), z, 12
+販売中, はんばいちゅう, Sedang dijual, z, 12
+表示, ひょうじ, Tampilan, z, 12
+～順, ～じゅん, Urutkan berdasarkan ～, z, 12
+価格, かかく, Harga, z, 12
+状態, じょうたい, Kondisi, z, 12
+配送料, はいそうりょう, Biaya pengiriman, z, 12
+販売状況, はんばいじょうきょう, Status penjualan, z, 12
+指定する, していする, Menentukan, z, 12
+取り消し, とりけし, Batal, z, 12
+完了, かんりょう, Selesai, z, 12
+購入（する）, こうにゅう（する）, Membeli, z, 12
+傷, きず, Goresan / Luka, z, 12
+汚れ, よごれ, Noda / Kotoran, z, 12
+～込み, ～こみ, Termasuk ～, z, 12
+～合, ～ごう, ～ go (satuan ukur beras), z, 12
+出品する, しゅっぴんする, Menjual (di market), z, 12
+問題なく, もんだいなく, Tanpa masalah, z, 12
+炊ける, たける, (Nasi) Matang, z, 12
+詳細, しょうさい, Detail, z, 12
+～製, ～せい, Buatan ～, z, 12
+幅, はば, Lebar, z, 12
+奥行, おくゆき, Kedalaman, z, 12
+高さ, たかさ, Tinggi, z, 12
+重さ, おもさ, Berat, z, 12
+説明書, せつめいしょ, Buku panduan, z, 12
+～つき, ～つき, Dilengkapi ～, z, 12
+購入手続き, こうにゅうてつづき, Prosedur pembelian, z, 12
+重さ, おもさ, Berat, z, 12
+連続, れんぞく, Berkelanjutan, z, 12
+充電, じゅうでん, Mengisi daya, z, 12
+しっかり, しっかり, Dengan baik, z, 12
+使用時間, しようじかん, Waktu penggunaan, z, 12
+こんな, こんな, Seperti ini, z, 12
+モード, モード, Mode, z, 12
+多機能, たきのう, Multifungsi, z, 12
+長持ち, ながもち, Tahan lama, z, 12
+超軽量, ちょうけいりょう, Super ringan, z, 12
+お手入れ, おていれ, Perawatan, z, 12
+吸引（する）, きゅういん（する）, (Daya) Hisap, z, 12
+吸引力, きゅういんりょく, Kekuatan hisap, z, 12
+コンパクト（な）, コンパクト（な）, Ringkas, z, 12
+持ち運ぶ, もちはこぶ, Membawa, z, 12
+重視する, じゅうしする, Mengutamakan, z, 12
+すみずみ, すみずみ, Sudut-sudut, z, 12
+税別, ぜいべつ, Sebelum pajak, z, 12
+広告の品, こうこくのしな, Barang iklan, z, 12
+特別価格, とくべつかかく, Harga spesial, z, 12
+コードレス, コードレス, Nirkabel, z, 12
+希望小売価格, きぼうこうりかかく, Harga eceran yang disarankan, z, 12
+軽い, かるい, Ringan, z, 12
+動かす, うごかす, Menggerakkan, z, 12
+持つ, もつ, Membawa / Memiliki, z, 12
+比べる, くらべる, Membandingkan, z, 12
+パワフル（な）, パワフル（な）, Bertenaga, z, 12
+機能, きのう, Fungsi, z, 12
+つく, つく, Terdapat / Terpasang, z, 12
+カーペット, カーペット, Karpet, z, 12
+畳, たたみ, Tatami, z, 12
+エコモード, エコモード, Mode hemat, z, 12
+ですから, ですから, Makanya / Oleh karena itu, z, 12
+～に合わせて, ～にあわせて, Menyesuaikan dengan ～, z, 12
+複雑（な）, ふくざつ（な）, Rumit, z, 12
+重い, おもい, Berat, z, 12
+予算オーバー, よさんオーバー, Melebihi anggaran, z, 12
+シンプル（な）, シンプル（な）, Sederhana, z, 12
+消費税, しょうひぜい, Pajak konsumsi, z, 12
+～抜き, ～ぬき, Tanpa ～, z, 12
+～引き, ～びき, Diskon ～, z, 12
+配送, はいそう, Pengiriman, z, 12
+合わせて, あわせて, Totalnya, z, 12
+ポイント, ポイント, Poin, z, 12
+貯まる, たまる, Terkumpul, z, 12
+変わる, かわる, Berubah, z, 12
+安くなりますか？, やすくなりますか？, Apa bisa lebih murah?, z, 12
+おいくらぐらいでお探しですか？, おいくらぐらいでおさがしですか？, Anda mencari di kisaran harga berapa?, z, 12
+どちらにお住まいですか？, どちらにおすまいですか？, Anda tinggal di mana?, z, 12
+ご利用になりますか？, ごりようになりますか？, Apakah Anda akan menggunakan...?, z, 12
+
+公共, こうきょう, Publik, z, 13
+施設, しせつ, Fasilitas, z, 13
+図書館, としょかん, Perpustakaan, z, 13
+美術館, びじゅつかん, Museum seni, z, 13
+民俗資料館, みんぞくしりょうかん, Museum folklor, z, 13
+体育館, たいいくかん, Gedung olahraga, z, 13
+スポーツジム, スポーツジム, Pusat kebugaran, z, 13
+お風呂, おふろ, Pemandian, z, 13
+入浴施設, にゅうよくしせつ, Fasilitas pemandian, z, 13
+インフォメーションコーナー, インフォメーションコーナー, Pojok informasi, z, 13
+プラネタリウム, プラネタリウム, Planetarium, z, 13
+物産コーナー, ぶっさんコーナー, Pojok produk lokal, z, 13
+市内, しない, Dalam kota, z, 13
+パンフレット, パンフレット, Pamflet, z, 13
+外国語, がいこくご, Bahasa asing, z, 13
+CD, シーディー, CD, z, 13
+昔, むかし, Zaman dulu, z, 13
+道具, どうぐ, Alat, z, 13
+文化施設, ぶんかしせつ, Fasilitas budaya, z, 13
+建てる, たてる, Membangun, z, 13
+メイン, メイン, Utama, z, 13
+PC, ピーシー, PC, z, 13
+自由に, じゆうに, Dengan bebas, z, 13
+展示する, てんじする, Memamerkan, z, 13
+歴史, れきし, Sejarah, z, 13
+利用（する）, りよう（する）, Menggunakan, z, 13
+室内用, しつないよう, Untuk dalam ruangan, z, 13
+オリエンテーション, オリエンテーション, Orientasi, z, 13
+延長料金, えんちょうりょうきん, Biaya perpanjangan, z, 13
+～につき, ～につき, Per ～, z, 13
+かかる, かかる, Membutuhkan (biaya/waktu), z, 13
+下りる, おりる, Turun, z, 13
+シューズ, シューズ, Sepatu, z, 13
+マシン, マシン, Mesin, z, 13
+トレーナー, トレーナー, Pelatih (trainer), z, 13
+～ほど, ～ほど, Sekitar ～, z, 13
+受ける, うける, Menerima / Mengambil, z, 13
+声をかける, こえをかける, Menyapa / Memanggil, z, 13
+ご了承ください, ごりょうしょうください, Mohon dimengerti., z, 13
+受けていただきます, うけていただきます, (Anda) Kami minta untuk mengambil ～., z, 13
+絵, え, Gambar / Lukisan, z, 13
+さまざま（な）, さまざま（な）, Bermacam-macam, z, 13
+彫刻, ちょうこく, Patung / Ukiran, z, 13
+画家, がか, Pelukis, z, 13
+～を中心に, ～をちゅうしんに, Berpusat pada ～, z, 13
+セット券, セットけん, Tiket set, z, 13
+フラッシュ, フラッシュ, Lampu kilat (flash), z, 13
+券売機, けんばいき, Mesin tiket, z, 13
+休憩室, きゅうけいしつ, Ruang istirahat, z, 13
+ついている, ついている, Termasuk / Dilengkapi, z, 13
+IT, アイティー, IT, z, 13
+利用者カード, りようしゃカード, Kartu pengguna, z, 13
+プリントアウト, プリントアウト, Cetak (print-out), z, 13
+インターネット, インターネット, Internet, z, 13
+プリンター, プリンター, Printer, z, 13
+空いている, あいている, Kosong / Tersedia, z, 13
+確認する, かくにんする, Memeriksa / Mengkonfirmasi, z, 13
+在留カード, ざいりゅうカード, Kartu izin tinggal, z, 13
+何冊, なんさつ, Berapa buku, z, 13
+～冊, ～さつ, ～ (jilid) buku, z, 13
+合わせて, あわせて, Total, z, 13
+～点, ～てん, ～ (buah) barang, z, 13
+飲食禁止, いんしょくきんし, Dilarang makan dan minum, z, 13
+返す, かえす, Mengembalikan, z, 13
+閉まる, しまる, Tutup, z, 13
+返却ポスト, へんきゃくポスト, Kotak pengembalian, z, 13
+開く, あく, Buka, z, 13
+返却, へんきゃく, Pengembalian, z, 13
+お読みください, およみください, Silakan baca., z, 13
+延ばす, のばす, Memperpanjang, z, 13
+～のうち, ～のうち, Di antara ～, z, 13
+カセットテープ, カセットテープ, Kaset pita, z, 13
+～禁止, ～きんし, Dilarang ～, z, 13
+立入禁止, たちいりきんし, Dilarang masuk, z, 13
+関係者, かんけいしゃ, Pihak terkait, z, 13
+～以外, ～いがい, Kecuali ～, z, 13
+預ける, あずける, Menitipkan, z, 13
+お預けください, おあずけください, Silakan titipkan., z, 13
+館内, かんない, Di dalam gedung, z, 13
+通話, つうわ, Panggilan telepon, z, 13
+ご遠慮ください, ごえんりょください, Mohon untuk tidak ～., z, 13
+お控えください, おひかえください, Mohon untuk tidak ～., z, 13
+入館, にゅうかん, Masuk (gedung), z, 13
+入れ墨, いれずみ, Tato (tradisional), z, 13
+タトゥー, タトゥー, Tato, z, 13
+シール, シール, Stiker, z, 13
+ボディペイント, ボディペイント, Cat tubuh, z, 13
+お断りしています, おことわりしています, Kami menolak ～., z, 13
+
+サービス, サービス, Layanan, z, 14
+郵便局, ゆうびんきょく, Kantor pos, z, 14
+不動産屋, ふどうさんや, Agen real estate, z, 14
+理髪店, りはつてん, Tukang cukur, z, 14
+床屋, とこや, Tukang cukur, z, 14
+美容院, びよういん, Salon kecantikan, z, 14
+クリーニング店, クリーニングてん, Binatu (Dry cleaner), z, 14
+コインランドリー, コインランドリー, Binatu (koin), z, 14
+中古車店, ちゅうこしゃてん, Toko mobil bekas, z, 14
+自転車店, じてんしゃてん, Toko sepeda, z, 14
+携帯ショップ, けいたいショップ, Toko ponsel, z, 14
+スマホ修理店, スマホしゅうりてん, Toko reparasi HP, z, 14
+リサイクルショップ, リサイクルショップ, Toko daur ulang, z, 14
+クリーニング, クリーニング, Binatu, z, 14
+シミ, シミ, Noda, z, 14
+落ちる, おちる, Hilang / Luntur, z, 14
+シミ抜き, シミぬき, Penghilangan noda, z, 14
+別料金, べつりょうきん, Biaya tambahan, z, 14
+お渡し, おわたし, Penyerahan, z, 14
+空気, くうき, Udara / Angin, z, 14
+空気入れ, くうきいれ, Pompa angin, z, 14
+入る, はいる, Masuk, z, 14
+タイヤ, タイヤ, Ban, z, 14
+キャップ, キャップ, Tutup (ban), z, 14
+はずす, はずす, Melepas, z, 14
+はさむ, はさむ, Menjepit, z, 14
+かぶせる, かぶせる, Menutupkan, z, 14
+ついでに, ついでに, Sekalian, z, 14
+油を差す, あぶらをさす, Meminyaki, z, 14
+どれどれ, どれどれ, Coba saya lihat., z, 14
+宅配便, たくはいびん, Jasa pengiriman, z, 14
+着払い, ちゃくばらい, Bayar di tempat, z, 14
+元払い, もとばらい, Bayar di muka, z, 14
+受け取る, うけとる, Menerima, z, 14
+伝票, でんぴょう, Resi / Slip, z, 14
+指定, してい, Menentukan, z, 14
+午前中, ごぜんちゅう, Pagi hari, z, 14
+最も, もっとも, Paling, z, 14
+お届け, おとどけ, Pengiriman, z, 14
+お預かりします, おあずかりします, (Barang) Kami terima., z, 14
+表示する, ひょうじする, Menampilkan, z, 14
+キャッシュカード, キャッシュカード, Kartu ATM, z, 14
+お引き出し, おひきだし, Penarikan (uang), z, 14
+次に, つぎに, Selanjutnya, z, 14
+暗証番号, あんしょうばんごう, Nomor PIN, z, 14
+入力する, にゅうりょくする, Memasukkan (input), z, 14
+～桁, ～けた, ～ digit, z, 14
+緑色, みどりいろ, Warna hijau, z, 14
+金額, きんがく, Jumlah uang, z, 14
+～円札, ～えんさつ, Lembar ～ yen, z, 14
+一部, いちぶ, Sebagian, z, 14
+両替（する）, りょうがえ（する）, Menukar uang, z, 14
+利用明細, りようめいさい, Rincian penggunaan, z, 14
+紙幣, しへい, Uang kertas, z, 14
+お取りください, おとりください, Silakan ambil., z, 14
+ご利用ありがとうございました, ごりようありがとうございました, Terima kasih telah menggunakan (layanan kami)., z, 14
+ポストに入れる, ポストにいれる, Memasukkan ke kotak pos, z, 14
+インターネット, インターネット, Internet, z, 14
+申し込む, もうしこむ, Mendaftar / Meminta, z, 14
+郵便物, ゆうびんぶつ, Barang pos, z, 14
+不在, ふざい, Tidak ada (di rumah), z, 14
+窓口, まどぐち, Loket, z, 14
+再配達, さいはいたつ, Pengiriman ulang, z, 14
+自動, じどう, Otomatis, z, 14
+連絡票, れんらくひょう, Slip pemberitahuan, z, 14
+受け取り, うけとり, Penerimaan, z, 14
+印鑑, いんかん, Stempel (inkan), z, 14
+免許証, めんきょしょう, SIM, z, 14
+保険証, ほけんしょう, Kartu asuransi, z, 14
+マイナンバーカード, マイナンバーカード, Kartu My Number, z, 14
+当日, とうじつ, Hari ini / Hari H, z, 14
+携帯電話, けいたいでんわ, Telepon seluler, z, 14
+固定電話, こていでんわ, Telepon rumah, z, 14
+郵便番号, ゆうびんばんごう, Kode pos, z, 14
+種類番号, しゅるいばんごう, Nomor jenis, z, 14
+国際, こくさい, Internasional, z, 14
+書留, かきとめ, (Surat) Tercatat, z, 14
+小包, こづつみ, Paket kecil, z, 14
+お知らせ番号, おしらせばんごう, Nomor pemberitahuan, z, 14
+配達日, はいたつび, Tanggal pengiriman, z, 14
+保管期限, ほかんきげん, Batas waktu penyimpanan, z, 14
+勤め先, つとめさき, Tempat kerja, z, 14
+近所, きんじょ, Tetangga, z, 14
+配達希望日, はいたつきぼうび, Tanggal pengiriman yang diinginkan, z, 14
+配達先, はいたつさき, Alamat tujuan, z, 14
+どのように, どのように, Bagaimana, z, 14
+全体的に, ぜんたいてきに, Secara keseluruhan, z, 14
+～mm, ～ミリ, ～ mm, z, 14
+まわり, まわり, Sekitar, z, 14
+バリカン, バリカン, Gunting (listrik), z, 14
+ひげ剃り, ひげそり, Cukur jenggot/kumis, z, 14
+鏡, かがみ, Cermin, z, 14
+後ろのほう, うしろのほう, Bagian belakang, z, 14
+こんな感じ, こんなかんじ, Seperti ini, z, 14
+洗面台, せんめんだい, Wastafel, z, 14
+洗う, あらう, Mencuci, z, 14
+カット, カット, Potong (rambut), z, 14
+預かる, あずかる, Menerima (titipan), z, 14
+お返し, おかえし, Kembalian, z, 14
+なさいますか？, なさいますか？, Apakah Anda mau...?, z, 14
+～円からお預かりします, ～えんからおあずかりします, (Uang Anda) diterima ... yen., z, 14
+どのような, どのような, Yang seperti apa, z, 14
+長さ, ながさ, Panjang, z, 14
+シャンプー台, シャンプーだい, Tempat keramas, z, 14
+前髪, まえがみ, Poni, z, 14
+お待ちしておりました, おまちしておりました, Kami telah menunggu Anda., z, 14
+かゆいところはございませんか？, かゆいところはございませんか？, Apakah ada (bagian) yang gatal?, z, 14
+どうでしょうか？, どうでしょうか？, Bagaimana?, z, 14
+カラー, カラー, Pewarnaan (rambut), z, 14
+パーマ, パーマ, Keriting, z, 14
+トリートメント, トリートメント, Perawatan (rambut), z, 14
+外国人, がいこくじん, Orang asing, z, 14
+外国語, がいこくご, Bahasa asing, z, 14
+～による, ～による, Melalui ～ / Dengan ～, z, 14
+相談, そうだん, Konsultasi, z, 14
+翻訳, ほんやく, Terjemahan (tulis), z, 14
+通訳, つうやく, Terjemahan (lisan), z, 14
+健康診断, けんこうしんだん, Pemeriksaan kesehatan, z, 14
+生活ガイドブック, せいかつガイドブック, Buku panduan hidup, z, 14
+日本語教室, にほんごきょうしつ, Kelas bahasa Jepang, z, 14
+交流イベント, こうりゅうイベント, Acara pertukaran, z, 14
+質問, しつもん, Pertanyaan, z, 14
+ビザ, ビザ, Visa, z, 14
+ほかにも, ほかにも, Selain itu, z, 14
+情報, じょうほう, Informasi, z, 14
+けが, けが, Luka, z, 14
+有料, ゆうりょう, Berbayar, z, 14
+助かる, たすかる, Tertolong, z, 14
+楽に, らくに, Dengan mudah, z, 14
+暮らす, くらす, Hidup, z, 14
+センター, センター, Pusat, z, 14
+入門, にゅうもん, Pemula, z, 14
+上級, じょうきゅう, Mahir / Lanjutan, z, 14
+個人レッスン, こじんレッスン, Les privat, z, 14
+
+消す, けす, Mematikan (lampu), z, 15
+忘れずに, わすれずに, Jangan lupa, z, 15
+クールビズ, クールビズ, "Cool Biz", z, 15
+実施中, じっしちゅう, Sedang diberlakukan, z, 15
+軽装, けいそう, Pakaian ringan, z, 15
+ノー～, ノー～, Tanpa ～, z, 15
+設定, せってい, Pengaturan, z, 15
+ご理解とご協力のほど、よろしくお願いします, ごりかいとごきょうりょくのほど、よろしくおねがいします, Mohon pengertian dan kerja samanya., z, 15
+節電, せつでん, Hemat listrik, z, 15
+両面印刷, りょうめんいんさつ, Cetak bolak-balik, z, 15
+マイバッグ, マイバッグ, Tas (belanja) sendiri, z, 15
+レジ袋, レジぶくろ, Kantong plastik, z, 15
+有料化, ゆうりょうか, Menjadi berbayar, z, 15
+持参, じさん, Membawa sendiri, z, 15
+環境, かんきょう, Lingkungan, z, 15
+エコ, エコ, Ramah lingkungan, z, 15
+節電する, せつでんする, Menghemat listrik, z, 15
+節水する, せっすいする, Menghemat air, z, 15
+紙, かみ, Kertas, z, 15
+節約する, せつやくする, Menghemat, z, 15
+リサイクルする, リサイクルする, Mendaur ulang, z, 15
+ごみ, ごみ, Sampah, z, 15
+分別する, ぶんべつする, Memilah, z, 15
+減らす, へらす, Mengurangi, z, 15
+設定温度, せっていおんど, Suhu yang diatur, z, 15
+下げる, さげる, Menurunkan, z, 15
+もったいない, もったいない, Sayang (jika dibuang) / Boros, z, 15
+缶, かん, Kaleng, z, 15
+まとめる, まとめる, Mengumpulkan, z, 15
+出す, だす, Mengeluarkan (air), z, 15
+洗剤, せんざい, Deterjen, z, 15
+止める, とめる, Menghentikan (air), z, 15
+すすぐ, すすぐ, Membilas, z, 15
+ストロー, ストロー, Sedotan, z, 15
+マイ～, マイ～, ...pribadi, z, 15
+持ち歩く, もちあるく, Membawa-bawa, z, 15
+マイボトル, マイボトル, Botol (minum) sendiri, z, 15
+ペットボトル, ペットボトル, Botol plastik, z, 15
+資源, しげん, Sumber daya (dapat didaur ulang), z, 15
+分け方, わけかた, Cara memilah, z, 15
+出し方, だしかた, Cara membuang, z, 15
+集積所, しゅうせきじょ, Tempat pengumpulan, z, 15
+収集日, しゅうしゅうび, Hari pengumpulan, z, 15
+資源ごみ, しげんごみ, Sampah daur ulang, z, 15
+～種類, ～しゅるい, ～ jenis, z, 15
+分ける, わける, Memisahkan, z, 15
+ひも, ひも, Tali, z, 15
+しばる, しばる, Mengikat, z, 15
+新聞, しんぶん, Koran, z, 15
+雑誌, ざっし, Majalah, z, 15
+中身, なかみ, Isi, z, 15
+びん, びん, Botol (kaca), z, 15
+キャップ, キャップ, Tutup (botol plastik), z, 15
+ラベル, ラベル, Label, z, 15
+つぶす, つぶす, Meremukkan, z, 15
+紙パック, かみパック, Karton (minuman), z, 15
+切り開く, きりひらく, Membuka (dengan memotong), z, 15
+食品トレイ, しょくひんトレイ, Nampan makanan, z, 15
+可燃ごみ, かねんごみ, Sampah mudah terbakar, z, 15
+生ごみ, なまごみ, Sampah dapur, z, 15
+水を切る, みずをきる, Meniriskan air, z, 15
+布, ぬの, Kain, z, 15
+しみこませる, しみこませる, Meresapkan, z, 15
+固める, かためる, Membekukan / Mengeraskan, z, 15
+プラスチック, プラスチック, Plastik, z, 15
+再生（する）, さいせい（する）, Mendaur ulang, z, 15
+少量, しょうりょう, Jumlah sedikit, z, 15
+植木, うえき, Tanaman pot, z, 15
+枝, えだ, Ranting, z, 15
+葉, は, Daun, z, 15
+使い古し, つかいふるし, Bekas pakai, z, 15
+凝固剤, ぎょうこざい, Bahan penggumpal, z, 15
+ビニール, ビニール, Vinil / Plastik, z, 15
+～類, ～るい, Jenis ～, z, 15
+ラップ, ラップ, Plastik pembungkus, z, 15
+容器, ようき, Wadah, z, 15
+発泡スチロール, はっぽうスチロール, Styrofoam, z, 15
+不燃ごみ, ふねんごみ, Sampah tidak mudah terbakar, z, 15
+割れる, われる, Pecah, z, 15
+包む, つつむ, Membungkus, z, 15
+危険, きけん, Bahaya, z, 15
+乾電池, かんでんち, Baterai kering, z, 15
+刃物, はもの, Benda tajam, z, 15
+ガラス, ガラス, Kaca, z, 15
+陶磁器, とうじき, Keramik, z, 15
+電球, でんきゅう, Bohlam, z, 15
+アルミ製品, アルミせいひん, Produk aluminium, z, 15
+金属, きんぞく, Logam, z, 15
+家電製品, かでんせいひん, Produk elektronik, z, 15
+粗大ごみ, そだいごみ, Sampah besar, z, 15
+家具, かぐ, Mebel, z, 15
+寝具, しんぐ, Peralatan tidur, z, 15
+牛乳パック, ぎゅうにゅうパック, Karton susu, z, 15
+使い切る, つかいきる, Menghabiskan, z, 15
+燃える, もえる, Terbakar, z, 15
+取る, とる, Melepas, z, 15
+出す, だす, Membuang (sampah), z, 15
+粗大ごみ受付センター, そだいごみうけつけセンター, Pusat penerimaan sampah besar, z, 15
+大きさ, おおきさ, Ukuran, z, 15
+シール, シール, Stiker, z, 15
+貼る, はる, Menempelkan, z, 15
+
+災害, さいがい, Bencana, z, 16
+台風, たいふう, Topan, z, 16
+地震, じしん, Gempa bumi, z, 16
+火事, かじ, Kebakaran, z, 16
+火災, かさい, Kebakaran, z, 16
+大雪, おおゆき, Salju lebat, z, 16
+津波, つなみ, Tsunami, z, 16
+起こる, おこる, Terjadi, z, 16
+揺れる, ゆれる, Bergetar / Berguncang, z, 16
+火事になる, かじになる, Menjadi kebakaran, z, 16
+火が出る, ひがでる, Api muncul, z, 16
+積もる, つもる, Menumpuk (salju), z, 16
+ニュース, ニュース, Berita, z, 16
+緊急速報, きんきゅうそくほう, Laporan darurat, z, 16
+避難する, ひなんする, Mengungsi, z, 16
+倒れる, たおれる, Jatuh / Roboh, z, 16
+離れる, はなれる, Menjauh, z, 16
+近づく, ちかづく, Mendekat, z, 16
+隠れる, かくれる, Bersembunyi, z, 16
+あわてる, あわてる, Panik, z, 16
+落ち着く, おちつく, Tenang, z, 16
+行動する, こうどうする, Bertindak, z, 16
+出る, でる, Keluar, z, 16
+最新, さいしん, Terbaru, z, 16
+確認する, かくにんする, Memeriksa / Memastikan, z, 16
+海岸, かいがん, Pantai, z, 16
+上陸する, じょうりくする, Mendarat (topan), z, 16
+非常に, ひじょうに, Sangat, z, 16
+激しい, はげしい, Hebat / Kencang, z, 16
+様子, ようす, Keadaan, z, 16
+絶対に, ぜったいに, Sama sekali (jangan), z, 16
+やめる, やめる, Berhenti, z, 16
+安全（な）, あんぜん（な）, Aman, z, 16
+～から～にかけて, ～から～にかけて, Dari ～ hingga ～, z, 16
+関東, かんとう, (Wilayah) Kanto, z, 16
+見込み, みこみ, Diperkirakan, z, 16
+伊豆諸島, いずしょとう, Kepulauan Izu, z, 16
+東海, とうかい, (Wilayah) Tokai, z, 16
+局地的に, きょくちてきに, Secara lokal, z, 16
+係員, かかりいん, Petugas, z, 16
+指示, しじ, Instruksi, z, 16
+従う, したがう, Mengikuti, z, 16
+年寄り, としより, Lansia, z, 16
+優先, ゆうせん, Prioritas, z, 16
+揺れ, ゆれ, Guncangan, z, 16
+警戒する, けいかいする, Waspada, z, 16
+守る, まもる, Melindungi (diri), z, 16
+家具, かぐ, Mebel, z, 16
+震源, しんげん, Pusat gempa, z, 16
+海底, かいてい, Dasar laut, z, 16
+～のおそれがある, ～のおそれがある, Ada kemungkinan ～, z, 16
+緊急地震速報, きんきゅうじしんそくほう, Peringatan dini gempa, z, 16
+滋賀, しが, Shiga, z, 16
+兵庫, ひょうご, Hyogo, z, 16
+福井, ふくい, Fukui, z, 16
+三重, みえ, Mie, z, 16
+和歌山, わかやま, Wakayama, z, 16
+香川, かがわ, Kagawa, z, 16
+近畿地方, きんきちほう, Wilayah Kinki, z, 16
+感じる, かんじる, Merasakan, z, 16
+防災訓練, ぼうさいくんれん, Latihan bencana, z, 16
+避難訓練, ひなんくんれん, Latihan evakuasi, z, 16
+防災頭巾, ぼうさいずきん, Tudung pelindung bencana, z, 16
+ヘルメット, ヘルメット, Helm, z, 16
+かぶる, かぶる, Memakai (helm), z, 16
+ドア, ドア, Pintu, z, 16
+開ける, あける, Membuka, z, 16
+火, ひ, Api, z, 16
+消す, けす, Mematikan (api), z, 16
+消火する, しょうかする, Memadamkan api, z, 16
+消防署, しょうぼうしょ, Kantor pemadam kebakaran, z, 16
+119番, ひゃくじゅうきゅうばん, Nomor 119, z, 16
+集まる, あつまる, Berkumpul, z, 16
+並ぶ, ならぶ, Berbaris, z, 16
+点呼する, てんこする, Absen (nama), z, 16
+報告する, ほうこくする, Melapor, z, 16
+知らせる, しらせる, Memberi tahu, z, 16
+姿勢, しせい, Posisi / Postur, z, 16
+低くする, ひくくする, Merendahkan, z, 16
+しゃがむ, しゃがむ, Jongkok, z, 16
+ハンカチ, ハンカチ, Saputangan, z, 16
+口に当てる, くちにあてる, Menutup mulut, z, 16
+火災報知器, かさいほうちき, Alarm kebakaran, z, 16
+鳴る, なる, Berbunyi, z, 16
+震度, しんど, Skala (gempa), z, 16
+おさまる, おさまる, Berhenti (guncangan), z, 16
+避難, ひなん, Evakuasi, z, 16
+開始する, かいしする, Memulai, z, 16
+中庭, なかにわ, Halaman tengah, z, 16
+～ごと, ～ごと, Per ～, z, 16
+初期消火, しょきしょうか, Pemadaman api awal, z, 16
+消火器, しょうかき, Alat pemadam api, z, 16
+逃げ遅れる, にげおくれる, Terlambat melarikan diri, z, 16
+一つ一つ, ひとつひとつ, Satu per satu, z, 16
+見て回る, みてまわる, Melihat berkeliling, z, 16
+煙体験, けむりたいけん, Simulasi asap, z, 16
+煙, けむり, Asap, z, 16
+充満する, じゅうまんする, Mengisi penuh, z, 16
+逃げる, にげる, Melarikan diri, z, 16
+進む, すすむ, Maju, z, 16
+注意点, ちゅういてん, Poin perhatian, z, 16
+吸う, すう, Menghirup (asap), z, 16
+声, こえ, Suara, z, 16
+声をかけ合う, こえをかけあう, Saling memanggil, z, 16
+床, ゆか, Lantai, z, 16
+安全ピン, あんぜんピン, Pin pengaman, z, 16
+レバー, レバー, Tuas, z, 16
+ホース, ホース, Selang, z, 16
+抜く, ぬく, Mencabut, z, 16
+先, さき, Ujung, z, 16
+向ける, むける, Mengarahkan, z, 16
+途中, とちゅう, Di tengah, z, 16
+握る, にぎる, Menggenggam, z, 16
+噴射する, ふんしゃする, Menyemprotkan, z, 16
+左右, さゆう, Kanan kiri, z, 16
+狙う, ねらう, Mengincar / Menargetkan, z, 16
+消える, きえる, Padam, z, 16
+～m, ～メートル, ～ meter, z, 16
+～秒, ～びょう, ～ detik, z, 16
+感じる, かんじる, Merasakan, z, 16
+落ちる, おちる, Jatuh, z, 16
+ゆがむ, ゆがむ, Miring / Berubah bentuk, z, 16
+無理をする, むりをする, Memaksakan diri, z, 16
+ガスコンロ, ガスコンロ, Kompor gas, z, 16
+～必要がある／ない, ～ひつようがある／ない, Perlu / Tidak perlu ～, z, 16
+天井, てんじょう, Langit-langit, z, 16
+届く, とどく, Mencapai, z, 16
+危ない, あぶない, Berbahaya, z, 16
+町なか, まちなか, Di (tengah) kota, z, 16
+屋外, おくがい, Luar ruangan, z, 16
+ガラス, ガラス, Kaca, z, 16
+影響, えいきょう, Dampak / Pengaruh, z, 16
+断水する, だんすいする, Air mati, z, 16
+止まる, とまる, Berhenti, z, 16
+停電する, ていでんする, Listrik padam, z, 16
+電気, でんき, Listrik, z, 16
+ガス, ガス, Gas, z, 16
+通行止め, つうこうどめ, Jalan ditutup, z, 16
+避難所, ひなんじょ, Tempat evakuasi, z, 16
+給水車, きゅうすいしゃ, Truk air, z, 16
+炊き出し, たきだし, Dapur umum darurat, z, 16
+必要（な）, ひつよう（な）, Perlu / Dibutuhkan, z, 16
+水, みず, Air, z, 16
+非常食, ひじょうしょく, Makanan darurat, z, 16
+懐中電灯, かいちゅうでんとう, Senter, z, 16
+ろうそく, ろうそく, Lilin, z, 16
+ラジオ, ラジオ, Radio, z, 16
+毛布, もうふ, Selimut, z, 16
+寝袋, ねぶくろ, Kantong tidur, z, 16
+ポリタンク, ポリタンク, Jeriken, z, 16
+充電（する）, じゅうでん（する）, Mengisi daya, z, 16
+小学校, しょうがっこう, Sekolah dasar, z, 16
+総合福祉センター, そうごうふくしセンター, Pusat kesejahteraan umum, z, 16
+ショップ, ショップ, Toko, z, 16
+今回, こんかい, Kali ini, z, 16
+レベル, レベル, Level, z, 16
+一人暮らし, ひとりぐらし, Tinggal sendiri, z, 16
+戻る, もどる, Kembali, z, 16
+早め, はやめ, Lebih awal, z, 16
+続く, つづく, Berlanjut, z, 16
+容器, ようき, Wadah, z, 16
+仮設, かせつ, Sementara, z, 16
+力, ちから, Tenaga / Kekuatan, z, 16
+持ち出す, もちだす, Membawa keluar, z, 16
+賞味期限, しょうみきげん, Tanggal kedaluwarsa (makanan), z, 16
+使用期限, しようきげん, Batas waktu penggunaan, z, 16
+切れる, きれる, Habis / Kedaluwarsa, z, 16
+切れる, きれる, Habis (baterai), z, 16
+貴重品, きちょうひん, Barang berharga, z, 16
+電灯, でんとう, Lampu listrik, z, 16
+携帯ラジオ, けいたいラジオ, Radio portabel, z, 16
+非常持ち出し品, ひじょうもちだしひん, Barang bawaan darurat, z, 16
+生活（する）, せいかつ（する）, Hidup, z, 16
+下着, したぎ, Pakaian dalam, z, 16
+生理用品, せいりようひん, Pembalut, z, 16
+ウェットティッシュ, ウェットティッシュ, Tisu basah, z, 16
+ライター, ライター, Korek api, z, 16
+使い捨てカイロ, つかいすてカイロ, Penghangat sekali pakai, z, 16
+粉ミルク, こなミルク, Susu bubuk, z, 16
+おむつ, おむつ, Popok, z, 16
+卓上コンロ, たくじょうコンロ, Kompor portabel, z, 16
+ガスボンベ, ガスボンベ, Tabung gas (kecil), z, 16
+なべ, なべ, Panci, z, 16
+アウトドア用品, アウトドアようひん, Peralatan luar ruangan, z, 16
+かぜ薬, かぜぐすり, Obat flu, z, 16
+ばんそうこう, ばんそうこう, Plester, z, 16
+消毒液, しょうどくえき, Cairan antiseptik, z, 16
+モバイルバッテリー, モバイルバッテリー, Power bank, z, 16
+現金, げんきん, Uang tunai, z, 16
+預金通帳, よきんつうちょう, Buku tabungan, z, 16
+パスポート, パスポート, Paspor, z, 16
+健康保険証, けんこうほけんしょう, Kartu asuransi kesehatan, z, 16
+外国人登録証, がいこくじんとうろくしょう, Kartu registrasi orang asing, z, 16
+缶づめ, かんづめ, Makanan kaleng, z, 16
+インスタント食品, インスタントしょくひん, Makanan instan, z, 16
+
+和太鼓, わだいこ, Drum Jepang, z, 17
+サークル, サークル, Klub / Lingkaran, z, 17
+入る, はいる, Masuk (klub), z, 17
+誘う, さそう, Mengajak, z, 17
+おかげで, おかげで, Berkat, z, 17
+増える, ふえる, Bertambah, z, 17
+ゲストハウス, ゲストハウス, Wisma tamu, z, 17
+SNS, エスエヌエス, SNS, z, 17
+やりとり, やりとり, Berkomunikasi / Bertukar (pesan), z, 17
+～以外, ～いがい, Selain ～, z, 17
+うまい, うまい, Jago / Enak, z, 17
+ドラマ, ドラマ, Drama, z, 17
+ほとんど, ほとんど, Sebagian besar / Hampir, z, 17
+セリフ, セリフ, Dialog, z, 17
+アイディア, アイディア, Ide, z, 17
+笑う, わらう, Tertawa, z, 17
+そろそろ, そろそろ, Sebentar lagi / Perlahan, z, 17
+～のころ, ～のころ, Sekitar (waktu) ～, z, 17
+苦労する, くろうする, Mengalami kesulitan, z, 17
+締め日, しめび, Tanggal tutup buku, z, 17
+納期, のうき, Tenggat waktu (pengiriman), z, 17
+友達リクエスト, ともだちリクエスト, Permintaan pertemanan, z, 17
+承認する, しょうにんする, Menyetujui, z, 17
+授業, じゅぎょう, Pelajaran / Kelas, z, 17
+問題, もんだい, Masalah / Soal, z, 17
+感謝する, かんしゃする, Berterima kasih, z, 17
+
+将来, しょうらい, Masa depan, z, 18
+夢, ゆめ, Mimpi / Cita-cita, z, 18
+希望, きぼう, Harapan, z, 18
+作る, つくる, Membuat (perusahaan), z, 18
+就職する, しゅうしょくする, Mendapat pekerjaan, z, 18
+持つ, もつ, Memiliki (toko), z, 18
+稼ぐ, かせぐ, Menghasilkan (uang), z, 18
+貯金する, ちょきんする, Menabung, z, 18
+結婚する, けっこんする, Menikah, z, 18
+建てる, たてる, Membangun (rumah), z, 18
+進学する, しんがくする, Melanjutkan sekolah, z, 18
+留学する, りゅうがくする, Belajar di luar negeri, z, 18
+のんびり, のんびり, Santai, z, 18
+暮らす, くらす, Hidup, z, 18
+ずっと, ずっと, Terus-menerus / Selamanya, z, 18
+住む, すむ, Tinggal, z, 18
+働く, はたらく, Bekerja, z, 18
+職人, しょくにん, Pengrajin, z, 18
+ガイド, ガイド, Pemandu, z, 18
+通訳, つうやく, Penerjemah (lisan), z, 18
+日本語教師, にほんごきょうし, Guru bahasa Jepang, z, 18
+なる, なる, Menjadi (pengrajin), z, 18
+自動車, じどうしゃ, Mobil, z, 18
+整備, せいび, Perawatan / Perbaikan, z, 18
+役に立つ, やくにたつ, Bermanfaat, z, 18
+そのために, そのために, Untuk itu, z, 18
+技術, ぎじゅつ, Teknologi / Keterampilan, z, 18
+がんばる, がんばる, Berusaha, z, 18
+暮らし, くらし, Kehidupan, z, 18
+うまくいく, うまくいく, Berjalan lancar, z, 18
+周りの人, まわりのひと, Orang sekitar, z, 18
+若者, わかもの, Anak muda, z, 18
+卒業する, そつぎょうする, Lulus, z, 18
+別の, べつの, Yang lain, z, 18
+広げる, ひろげる, Memperluas, z, 18
+もともと, もともと, Aslinya, z, 18
+募集, ぼしゅう, Lowongan / Rekrutmen, z, 18
+応募する, おうぼする, Melamar, z, 18
+続ける, つづける, Melanjutkan, z, 18
+とにかく, とにかく, Pokoknya, z, 18
+ストレス, ストレス, Stres, z, 18
+知り合う, しりあう, Saling mengenal, z, 18
+最後, さいご, Terakhir, z, 18
+ひとこと, ひとこと, Sepatah kata, z, 18
+～始める, ～はじめる, Mulai ～, z, 18
+下手（な）, へた（な）, Tidak pandai, z, 18
+失敗する, しっぱいする, Gagal / Melakukan kesalahan, z, 18
+工業, こうぎょう, Industri, z, 18
+親切にする, しんせつにする, Berbuat baik, z, 18
+助ける, たすける, Menolong, z, 18
+`;

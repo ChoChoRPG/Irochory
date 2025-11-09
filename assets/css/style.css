@@ -41,7 +41,7 @@ body {
 .container {
     width: 100%;
     /* (PERUBAHAN) Ukuran desktop diperbesar */
-    max-width: 1280px; /* 2xl (dari 1152px) */
+    max-width: 1280px; /* 2xl */
     margin-left: auto;
     margin-right: auto;
     padding-left: 1rem; 
@@ -106,10 +106,20 @@ main.container {
     color: white; 
 }
 
+/* (PERUBAHAN) Ikon di tombol outline di-filter jadi putih */
 .btn-outline .icon {
     width: 1.25rem;
     height: 1.25rem;
     margin-right: 0.5rem;
+    
+    /* (BARU) Mengubah ikon hitam jadi putih */
+    filter: invert(1); 
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+.btn-outline:hover .icon,
+.btn-outline.active .icon {
+    opacity: 1;
 }
 
 .btn-circle {
@@ -150,8 +160,7 @@ main.container {
     height: 2.5rem; 
     width: 2.5rem; 
     
-    /* (BARU) Membuat logo SVG terlihat di background gelap */
-    /* Mengubah logo (yang mungkin hitam) menjadi putih */
+    /* (PERUBAHAN) Filter untuk logo Cho agar putih */
     filter: brightness(0) invert(1);
     opacity: 0.9; 
 }
@@ -253,7 +262,7 @@ main.container {
     border-radius: 0.75rem; 
     box-shadow: var(--shadow-lg);
     /* (PERUBAHAN) Ukuran desktop diperbesar */
-    max-width: 1152px; /* xl (dari 1024px) */
+    max-width: 1152px; /* xl */
     width: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -332,7 +341,6 @@ main.container {
     }
 }
 
-/* (BARU) Mengganti .hidden-checkbox */
 input[type="checkbox"].hidden-checkbox {
     display: none; 
 }
@@ -367,7 +375,6 @@ input[type="checkbox"].hidden-checkbox {
     opacity: 0.75;
 }
 
-/* (BARU) Selector checkbox diubah */
 input[type="checkbox"].hidden-checkbox:checked + .selection-label {
     background-color: var(--color-primary);
     color: white; 
@@ -381,26 +388,18 @@ input[type="checkbox"].hidden-checkbox:checked + .selection-label .label-bottom 
 
 .selection-controls {
     display: flex;
-    /* (PERUBAHAN) berdampingan di semua layar */
     flex-direction: row; 
-    /* (DIHAPUS) gap: 1rem; */
-    /* (BARU) Rata kiri-kanan di semua layar */
-    justify-content: space-between;
-    /* (PERUBAHAN) align tengah */
+    /* (PERUBAHAN) Rata kiri-kanan di semua layar */
+    justify-content: space-between; 
     align-items: center;
     margin-top: 2rem; 
     padding-top: 1.5rem; 
     border-top: 1px solid var(--color-border); 
 }
 
-@media (min-width: 768px) {
-    .selection-controls {
-        /* (DIHAPUS) justify-content: space-between; */
-        /* (DIHAPUS) gap: 0;  */
-    }
-}
+/* (DIHAPUS) Media query untuk .selection-controls dihapus */
 
-/* (BARU) Aturan padding untuk tombol acak (agar kotak) */
+/* (PERUBAHAN) Aturan padding untuk tombol acak (agar kotak) */
 #shuffle-toggle.btn-outline {
     padding: 0.75rem; /* Padding kotak */
 }
@@ -417,7 +416,7 @@ input[type="checkbox"].hidden-checkbox:checked + .selection-label .label-bottom 
 .error-message { color: var(--color-incorrect); }
 .loading-message { color: var(--color-text-muted); }
 
-/* === Layar 2: Flashcard === */
+/* === Layar 2: Flashcard (session.html) === */
 #flashcard-screen {
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -452,6 +451,7 @@ input[type="checkbox"].hidden-checkbox:checked + .selection-label .label-bottom 
 .card-container {
     width: 91.666%; 
     max-width: 672px; 
+    /* (PERUBAHAN) font-size clamp() akan mengatur tinggi */
     aspect-ratio: 3 / 2;
     margin: 0 auto;
     cursor: pointer;
@@ -496,7 +496,7 @@ input[type="checkbox"].hidden-checkbox:checked + .selection-label .label-bottom 
 
 .kanji-text {
     /* (PERUBAHAN) Menggunakan clamp() untuk font responsif */
-    font-size: clamp(2.5rem, 10vw, 3.75rem); 
+    font-size: clamp(2.5rem, 10vw, 4rem); 
     font-weight: 700;
     color: var(--color-text); 
 }
@@ -543,7 +543,7 @@ input[type="checkbox"].hidden-checkbox:checked + .selection-label .label-bottom 
     50% { background-color: #F87171; }
 }
 
-/* === Layar 3: Hasil === */
+/* === Layar 3: Hasil (session.html) === */
 .results-card {
     text-align: center;
 }

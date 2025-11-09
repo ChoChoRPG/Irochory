@@ -4,33 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Irochori - Sesi Belajar</title>
-    <!-- Tautan ke CSS Kustom Anda -->
     <link rel="stylesheet" href="assets/css/style.css">
-    <!-- Ikon Favicon -->
     <link rel="icon" href="assets/img/logo.svg">
 </head>
 <body>
 
     <main class="container">
 
-        <!-- (DIHAPUS) Layar Pemilihan tidak ada di sini -->
-
-        <!-- ===== 2. Layar Flashcard ===== -->
-        <section id="flashcard-screen" class="screen active"> <!-- (BARU) Langsung aktif -->
-            <!-- Progress Bar -->
+        <section id="flashcard-screen" class="screen active"> 
             <div class="progress-bar">
                 <span id="progress-text">1 / ...</span>
                 <button id="exit-button" class="btn-exit">Keluar</button>
             </div>
             
-            <!-- Card Container -->
             <div id="card-container" class="card-container">
                 <div id="card-inner" class="card-inner">
-                    <!-- Bagian Depan (Kanji) -->
                     <div id="card-front" class="card-face card-front">
                         <span id="card-kanji" class="kanji-text">Memuat...</span>
                     </div>
-                    <!-- Bagian Belakang (Furigana + Arti) -->
                     <div id="card-back" class="card-face card-back">
                         <span id="card-furigana" class="furigana-text"></span>
                         <span id="card-arti" class="arti-text"></span>
@@ -38,7 +29,6 @@
                 </div>
             </div>
 
-            <!-- Tombol Benar / Salah -->
             <div id="answer-buttons" class="answer-buttons">
                 <button id="incorrect-button" class="btn btn-circle btn-incorrect">
                     <img src="assets/img/silang.svg" alt="Salah" class="icon-large">
@@ -52,7 +42,6 @@
             </div>
         </section>
 
-        <!-- ===== 3. Layar Hasil ===== -->
         <section id="results-screen" class="screen hidden">
             <div class="card results-card">
                 <h2 class="screen-title">Sesi Selesai!</h2>
@@ -72,8 +61,7 @@
                                 </tr>
                             </thead>
                             <tbody id="incorrect-list-tbody">
-                                <!-- Daftar kesalahan akan dimasukkan oleh JS -->
-                            </tbody>
+                                </tbody>
                         </table>
                     </div>
                 </div>
@@ -86,7 +74,6 @@
 
     </main>
 
-    <!-- (BARU) JavaScript Khusus untuk Sesi Ini (Inline) -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // === Global State ===
@@ -151,14 +138,17 @@
             
             // Fungsi untuk memulai/mengulang sesi
             function startSession() {
-                // Salin dari deck asli dan acak JIKA diperlukan (misal saat restart)
+                // (PERBAIKAN) Kita sekarang menggunakan deck apa adanya dari localStorage
+                // app.js sudah mengurus shuffle, jadi kita TIDAK shuffle lagi di sini.
                 currentDeck = [...originalDeck];
                 
-                // Shuffle deck (Fisher-Yates)
+                /*
+                // (DIHAPUS) Blok shuffle ini dihapus agar urutan tetap terjaga
                 for (let i = currentDeck.length - 1; i > 0; i--) {
                     const j = Math.floor(Math.random() * (i + 1));
                     [currentDeck[i], currentDeck[j]] = [currentDeck[j], currentDeck[i]];
                 }
+                */
                 
                 // Reset state
                 currentCardIndex = 0;

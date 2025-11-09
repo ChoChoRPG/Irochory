@@ -216,8 +216,12 @@ document.addEventListener("DOMContentLoaded", () => {
       // Kita hanya menyimpan deck yang sudah jadi, bukan semua 54 file
       localStorage.setItem("irochoriDeck", JSON.stringify(currentDeck));
 
+      // (PERBAIKAN YANG DIMINTA) Simpan juga status acak!
+      localStorage.setItem("irochoriShuffle", isShuffled);
+
       // Alihkan ke session.html
-      window.location.href = "session.html";
+      // (PERBAIKAN) Menambahkan './' sangat penting untuk mode preview
+      window.location.href = "./session.html";
     } catch (e) {
       console.error("Gagal menyimpan ke localStorage: ", e);
       selectionError.textContent =

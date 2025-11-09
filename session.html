@@ -4,24 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Irochori - Sesi Belajar</title>
+    <!-- Tautan ke CSS Kustom Anda -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Ikon Favicon -->
     <link rel="icon" href="assets/img/logo.svg">
 </head>
 <body>
 
     <main class="container">
 
+        <!-- ===== 2. Layar Flashcard ===== -->
         <section id="flashcard-screen" class="screen active"> 
+            <!-- Progress Bar -->
             <div class="progress-bar">
                 <span id="progress-text">1 / ...</span>
                 <button id="exit-button" class="btn-exit">Keluar</button>
             </div>
             
+            <!-- Card Container -->
             <div id="card-container" class="card-container">
                 <div id="card-inner" class="card-inner">
+                    <!-- Bagian Depan (Kanji) -->
                     <div id="card-front" class="card-face card-front">
                         <span id="card-kanji" class="kanji-text">Memuat...</span>
                     </div>
+                    <!-- Bagian Belakang (Furigana + Arti) -->
                     <div id="card-back" class="card-face card-back">
                         <span id="card-furigana" class="furigana-text"></span>
                         <span id="card-arti" class="arti-text"></span>
@@ -29,7 +36,9 @@
                 </div>
             </div>
 
+            <!-- Tombol Benar / Salah -->
             <div id="answer-buttons" class="answer-buttons">
+                <!-- INI TOMBOL SALAH YANG ANDA MAKSUD -->
                 <button id="incorrect-button" class="btn btn-circle btn-incorrect">
                     <img src="assets/img/silang.svg" alt="Salah" class="icon-large">
                 </button>
@@ -42,13 +51,15 @@
             </div>
         </section>
 
+        <!-- ===== 3. Layar Hasil ===== -->
         <section id="results-screen" class="screen hidden">
             <div class="card results-card">
                 <h2 class="screen-title">Sesi Selesai!</h2>
                 <p class="score-label">Skor Anda:</p>
                 <div id="score-display" class="score-display">0 / 0</div>
 
-                <div id="incorrect-list-container" class="incorrect-container">
+                <!-- INI ADALAH TABEL UNTUK REVIEW KANJI YANG SALAH -->
+                <div id="incorrect-list-container" class="incorrect-container hidden">
                     <h3 class="incorrect-title">Daftar Kesalahan:</h3>
                     <div class="table-wrapper">
                         <table class="results-table">
@@ -61,7 +72,8 @@
                                 </tr>
                             </thead>
                             <tbody id="incorrect-list-tbody">
-                                </tbody>
+                                <!-- Daftar kesalahan akan dimasukkan oleh JS -->
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -74,90 +86,107 @@
 
     </main>
 
+    <!-- JavaScript Khusus untuk Sesi Ini (Inline) -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // === Global State ===
-            let originalDeck = []; // Salinan data asli dari localStorage
+            let originalDeck = []; 
             let currentDeck = [];
             let currentCardIndex = 0;
             let score = 0;
-            let incorrectAnswers = [];
+            let incorrectAnswers = []; 
             let synth = window.speechSynthesis;
             let utterance = new SpeechSynthesisUtterance();
+            let wasShuffledInitially = false; 
 
             // === DOM Element Selectors ===
-            const screens = {
-                flashcard: document.getElementById('flashcard-screen'),
-                results: document.getElementById('results-screen'),
-            };
-            const exitButton = document.getElementById('exit-button');
-            const progressText = document.getElementById('progress-text');
-            const cardContainer = document.getElementById('card-container');
-            const cardInner = document.getElementById('card-inner');
-            const cardKanji = document.getElementById('card-kanji');
-            const cardFurigana = document.getElementById('card-furigana');
-            const cardArti = document.getElementById('card-arti');
-            const answerButtons = document.getElementById('answer-buttons');
-            const correctButton = document.getElementById('correct-button');
-            const incorrectButton = document.getElementById('incorrect-button');
-            const ttsButton = document.getElementById('tts-button');
-            const scoreDisplay = document.getElementById('score-display');
-            const incorrectContainer = document.getElementById('incorrect-list-container');
-            const incorrectTbody = document.getElementById('incorrect-list-tbody');
-            const restartButton = document.getElementById('restart-button');
+            // (PERBAIKAN) Membungkus selector dalam try...catch untuk debugging
+            let screens, exitButton, progressText, cardContainer, cardInner, cardKanji, cardFurigana, cardArti, answerButtons, correctButton, incorrectButton, ttsButton, scoreDisplay, incorrectContainer, incorrectTbody, restartButton;
+            
+            try {
+                screens = {
+                    flashcard: document.getElementById('flashcard-screen'),
+                    results: document.getElementById('results-screen'),
+                };
+                exitButton = document.getElementById('exit-button');
+                progressText = document.getElementById('progress-text');
+                cardContainer = document.getElementById('card-container');
+                cardInner = document.getElementById('card-inner');
+                cardKanji = document.getElementById('card-kanji');
+                cardFurigana = document.getElementById('card-furigana');
+                cardArti = document.getElementById('card-arti');
+                answerButtons = document.getElementById('answer-buttons');
+                correctButton = document.getElementById('correct-button');
+                incorrectButton = document.getElementById('incorrect-button');
+                ttsButton = document.getElementById('tts-button');
+                scoreDisplay = document.getElementById('score-display');
+                incorrectContainer = document.getElementById('incorrect-list-container');
+                incorrectTbody = document.getElementById('incorrect-list-tbody'); 
+                restartButton = document.getElementById('restart-button');
+
+                // Cek jika ada yang null
+                if (!screens.flashcard || !screens.results || !scoreDisplay || !incorrectTbody || !incorrectContainer) {
+                    throw new Error("Satu atau lebih elemen DOM penting tidak ditemukan.");
+                }
+
+            } catch (e) {
+                console.error("Fatal Error saat mengambil elemen DOM:", e.message);
+                document.body.innerHTML = `<div style="color: red; padding: 2rem;">Error Kritis: ${e.message}. Cek ID elemen di HTML.</div>`;
+                return; // Stop eksekusi
+            }
 
             // === Logika Utama Sesi ===
             function initializeSession() {
                 const deckDataString = localStorage.getItem('irochoriDeck');
+                const shuffleDataString = localStorage.getItem('irochoriShuffle'); 
 
                 if (!deckDataString) {
-                    alert("Gagal memulai sesi (tidak ada data). Anda akan dikembalikan ke menu.");
-                    window.location.href = 'index.html';
+                    console.error("Gagal memulai sesi (tidak ada data). HARUS MULAI DARI INDEX.HTML.");
+                    document.body.innerHTML = `<div style="color: white; padding: 2rem; text-align: center; font-size: 1.25rem;">Gagal memuat sesi. Silakan mulai dari halaman <a href="./index.html" style="color: #3B82F6;">index.html</a> dan pilih materi.</div>`;
                     return;
                 }
 
                 try {
                     originalDeck = JSON.parse(deckDataString);
-                    // Bersihkan data agar tidak penuh
+                    wasShuffledInitially = (shuffleDataString === 'true'); 
                     localStorage.removeItem('irochoriDeck'); 
+                    localStorage.removeItem('irochoriShuffle'); 
                 } catch (e) {
-                    alert("Gagal membaca data sesi. Anda akan dikembalikan ke menu.");
-                    window.location.href = 'index.html';
+                    console.error("Gagal membaca data sesi.", e);
+                    window.location.href = './index.html';
                     return;
                 }
 
                 if (originalDeck.length === 0) {
-                    alert("Sesi kosong. Anda akan dikembalikan ke menu.");
-                    window.location.href = 'index.html';
+                    console.error("Sesi kosong. Anda akan dikembalikan ke menu.");
+                    window.location.href = './index.html';
                     return;
                 }
                 
                 setupEventListeners();
-                startSession(); // Memulai sesi pertama kali
+                startSession(wasShuffledInitially); 
             }
             
-            // Fungsi untuk memulai/mengulang sesi
-            function startSession() {
-                // (PERBAIKAN) Kita sekarang menggunakan deck apa adanya dari localStorage
-                // app.js sudah mengurus shuffle, jadi kita TIDAK shuffle lagi di sini.
+            function startSession(shuffleOnRestart = false) { 
+                console.log("Memulai sesi. Acak:", shuffleOnRestart);
                 currentDeck = [...originalDeck];
                 
-                /*
-                // (DIHAPUS) Blok shuffle ini dihapus agar urutan tetap terjaga
-                for (let i = currentDeck.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    [currentDeck[i], currentDeck[j]] = [currentDeck[j], currentDeck[i]];
+                if (shuffleOnRestart) {
+                     for (let i = currentDeck.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [currentDeck[i], currentDeck[j]] = [currentDeck[j], currentDeck[i]];
+                    }
                 }
-                */
                 
                 // Reset state
                 currentCardIndex = 0;
                 score = 0;
-                incorrectAnswers = [];
+                incorrectAnswers = []; 
                 
                 showScreen('flashcard');
                 answerButtons.classList.remove('hidden');
                 cardContainer.classList.remove('is-flipped', 'opacity-0', 'scale-95');
+                incorrectContainer.classList.add('hidden'); 
                 
                 displayCard();
             }
@@ -172,12 +201,12 @@
                     handleTTS();
                 });
                 
-                // Coba lagi HANYA mengulang sesi ini
-                restartButton.addEventListener('click', startSession); 
+                restartButton.addEventListener('click', () => {
+                    startSession(wasShuffledInitially);
+                }); 
                 
-                // Keluar kembali ke index.html
                 exitButton.addEventListener('click', () => {
-                    window.location.href = 'index.html';
+                    window.location.href = './index.html';
                 });
                 
                 document.addEventListener('keydown', (e) => {
@@ -185,10 +214,30 @@
                 });
             }
 
-            // === Logika Game (Sama seperti sebelumnya) ===
+            // (PERBAIKAN) Logika showScreen dibuat lebih eksplisit dan aman
             function showScreen(screenId) {
-                Object.values(screens).forEach(screen => screen.classList.remove('active'));
-                screens[screenId].classList.add('active');
+                console.log(`Menampilkan layar: ${screenId}`);
+                
+                // Sembunyikan semua layar
+                if (screens.flashcard) {
+                    screens.flashcard.classList.remove('active');
+                    screens.flashcard.classList.add('hidden'); // Tambahan
+                }
+                if (screens.results) {
+                    screens.results.classList.remove('active');
+                    screens.results.classList.add('hidden'); // Tambahan
+                }
+
+                // Tampilkan layar yang diminta
+                if (screenId === 'flashcard' && screens.flashcard) {
+                    screens.flashcard.classList.add('active');
+                    screens.flashcard.classList.remove('hidden');
+                } else if (screenId === 'results' && screens.results) {
+                    screens.results.classList.add('active');
+                    screens.results.classList.remove('hidden');
+                } else {
+                    console.error(`Layar dengan ID '${screenId}' tidak ditemukan.`);
+                }
             }
 
             function displayCard() {
@@ -224,7 +273,8 @@
                     currentCardIndex++;
                     
                     if (currentCardIndex >= currentDeck.length) {
-                        showResults();
+                        console.log("Kartu habis. Menampilkan hasil...");
+                        showResults(); // <-- PINDAH KE HASIL JIKA KARTU HABIS
                         return;
                     }
 
@@ -244,28 +294,42 @@
             }
 
             function showResults() {
-                showScreen('results');
-                scoreDisplay.textContent = `${score} / ${currentDeck.length}`;
-                incorrectTbody.innerHTML = '';
+                try {
+                    console.log("Fungsi showResults() dipanggil.");
+                    showScreen('results');
+                    
+                    console.log("Menampilkan skor...");
+                    scoreDisplay.textContent = `${score} / ${currentDeck.length}`;
+                    
+                    console.log("Mengosongkan tabel...");
+                    incorrectTbody.innerHTML = ''; // Kosongkan tabel dulu
 
-                if (incorrectAnswers.length === 0) {
-                    incorrectContainer.classList.add('hidden');
-                } else {
-                    incorrectContainer.classList.remove('hidden');
-                    incorrectAnswers.forEach((card, index) => {
-                        incorrectTbody.innerHTML += `
-                            <tr>
-                                <td>${index + 1}</td>
-                                <td>${card.kanji}</td>
-                                <td>${card.furigana}</td>
-                                <td>${card.arti}</td>
-                            </tr>
-                        `;
-                    });
+                    console.log(`Jumlah jawaban salah: ${incorrectAnswers.length}`);
+                    if (incorrectAnswers.length === 0) {
+                        incorrectContainer.classList.add('hidden'); 
+                    } else {
+                        incorrectContainer.classList.remove('hidden'); 
+                        
+                        incorrectAnswers.forEach((card, index) => {
+                            incorrectTbody.innerHTML += `
+                                <tr>
+                                    <td>${index + 1}</td>
+                                    <td>${card.kanji}</td>
+                                    <td>${card.furigana}</td>
+                                    <td>${card.arti}</td>
+                                </tr>
+                            `;
+                        });
+                        console.log("Tabel kesalahan selesai dibuat.");
+                    }
+                } catch (e) {
+                    console.error("ERROR FATAL di dalam showResults():", e.message);
+                    document.body.innerHTML = `<div style="color: red; padding: 2rem;">Error Kritis saat menampilkan hasil: ${e.message}. Cek konsol (F12) untuk detail.</div>`;
                 }
             }
             
             // Jalankan
+            console.log("Inisialisasi Sesi...");
             initializeSession();
         });
     </script>
